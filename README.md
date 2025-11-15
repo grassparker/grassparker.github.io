@@ -1,5 +1,24 @@
-# grassparker.github.io
+# Welcome to StudiLib
 A website and guide about StudiLib
+
+## About StudiLib
+This is the official website for StudiLib. It is a software for students to study and do pomos together. 
+
+---
+
+## Features
+
+- Feature 1: About
+- Feature 2: Privacy policy  
+- Feature 3: Updates
+- Feature 4: Contributions
+
+---
+
+## Installation / Setup
+
+1. Find the website here...
+
 
 Copyright (c) 2025 Candy.  
 All rights reserved.
