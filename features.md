@@ -1,5 +1,6 @@
-# Proposed features (core)
+# Features
 
+## Proposed features
 - 📅 Schedule Study Sessions – plan group study times and never miss a session.
 - 👥 Group Dashboard – see what your friends are studying and their current status.
 - 🎧 Join Voice Calls – hop into group calls and study together in real time.
@@ -9,5 +10,5 @@
 - 📊 Quick Stats – see how much your group studied today or this week.
 - 💬 Light Chat / Notes – jot quick messages or reminders for the group.
 
-# Upcoming
+## Upcoming features
 - Waiting to be released...
