@@ -15,3 +15,5 @@ minima:
     - title: X
       icon: x-twitter
       url: "https://x.com/grassparkour"
+minima:
+  hide_site_feed_link: true  # `false` or `null` by default
