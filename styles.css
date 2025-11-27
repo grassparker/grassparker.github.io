@@ -13,23 +13,26 @@
 }
 
 body {
+    background: linear-gradient(187deg,rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 56%, rgba(0, 119, 143, 1) 100%);
     font-family: "Pixelify Sans", Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #0A1931;
+    color: #E0E7FF;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* --- 2. Layout Containers --- */
+/*Layout*/
 .container {
     max-width: 1200px; /* Max width for content */
     margin: 0 auto; /* Center the container */
     padding: 20px;
 }
 
-/* --- 3. Header & Navigation --- */
+/*Header*/
 .main-header {
-    background: #333;
-    color: white;
+    color: #E0E7FF;
     padding: 1rem 0;
     text-align: center;
 }
@@ -45,19 +48,18 @@ body {
 }
 
 .main-nav ul li a {
-    color: white;
+    color: #E0E7FF;
     text-decoration: none;
     padding: 0 15px;
     transition: color 0.3s;
 }
 
 .main-nav ul li a:hover {
-    color: #4CAF50; /* A hover color */
+    color: #185ADB; /* A hover color */
 }
 
-/* --- 4. Main Content / Hero Section --- */
+/*Main section!*/
 .hero {
-    background: white;
     padding: 40px;
     text-align: center;
     border-radius: 8px;
@@ -69,26 +71,11 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- 5. Button Styling --- */
-.btn {
-    display: inline-block;
-    background: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 15px;
-    transition: background 0.3s;
-}
-
-.btn:hover {
-    background: #45a049;
-}
 
 /* --- 6. Footer --- */
 .main-footer {
-    background: #333;
-    color: white;
+    background: #0A1931;
+    color: #E0E7FF;
     text-align: center;
     padding: 1rem 0;
     margin-top: 40px;
