@@ -75,6 +75,77 @@
         </section>
     </main>
 
+    <!-- Pixelated mountains (displayed right above the footer) -->
+    <div class="pixel-mountains" aria-hidden="true">
+        <svg viewBox="0 0 800 140" preserveAspectRatio="none" role="img" aria-label="Pixel mountains at night with ice covered peaks">
+            <defs>
+                <rect id="px" width="10" height="10" />
+            </defs>
+            <!-- Night sky stars (small pixel squares) -->
+            <g id="stars" fill="#FFF7D6">
+                <rect x="40" y="18" width="4" height="4" />
+                <rect x="90" y="34" width="3" height="3" />
+                <rect x="160" y="26" width="3" height="3" />
+                <rect x="230" y="12" width="3" height="3" />
+                <rect x="320" y="22" width="4" height="4" />
+                <rect x="420" y="10" width="3" height="3" />
+                <rect x="520" y="30" width="4" height="4" />
+                <rect x="660" y="20" width="3" height="3" />
+                <rect x="740" y="36" width="3" height="3" />
+            </g>
+
+            <!-- Back small ridge -->
+            <g fill="#0F1A2B">
+                <rect x="0" y="100" width="800" height="40" />
+            </g>
+
+            <!-- Left mountain (pixel stepped) -->
+            <g class="mountain left" fill="#14263B">
+                <rect x="80" y="110" width="160" height="10" />
+                <rect x="90" y="100" width="140" height="10" />
+                <rect x="100" y="90" width="120" height="10" />
+                <rect x="110" y="80" width="100" height="10" />
+                <rect x="120" y="70" width="80" height="10" />
+                <rect x="130" y="60" width="60" height="10" />
+                <rect x="140" y="50" width="40" height="10" />
+                <rect x="150" y="40" width="20" height="10" fill="#E6F8FF" />
+                <rect x="150" y="30" width="10" height="10" fill="#E6F8FF" />
+            </g>
+
+            <!-- Center mountain with ice cap -->
+            <g class="mountain center">
+                <rect x="300" y="110" width="200" height="10" fill="#1B2B45" />
+                <rect x="310" y="100" width="180" height="10" fill="#1B2B45" />
+                <rect x="320" y="90" width="160" height="10" fill="#1B2B45" />
+                <rect x="330" y="80" width="140" height="10" fill="#1B2B45" />
+                <rect x="340" y="70" width="120" height="10" fill="#1B2B45" />
+                <rect x="350" y="60" width="100" height="10" fill="#1B2B45" />
+                <rect x="360" y="50" width="80" height="10" fill="#1B2B45" />
+                <rect x="370" y="40" width="60" height="10" fill="#BEEBFF" />
+                <rect x="380" y="30" width="40" height="10" fill="#E6F8FF" />
+                <rect x="390" y="20" width="20" height="10" fill="#E6F8FF" />
+            </g>
+
+            <!-- Right mountain (pixel stepped) -->
+            <g class="mountain right" fill="#12324A">
+                <rect x="520" y="110" width="160" height="10" />
+                <rect x="530" y="100" width="140" height="10" />
+                <rect x="540" y="90" width="120" height="10" />
+                <rect x="550" y="80" width="100" height="10" />
+                <rect x="560" y="70" width="80" height="10" />
+                <rect x="570" y="60" width="60" height="10" />
+                <rect x="580" y="50" width="40" height="10" />
+                <rect x="590" y="40" width="20" height="10" fill="#CFEFFF" />
+                <rect x="590" y="30" width="10" height="10" fill="#E6F8FF" />
+            </g>
+
+            <!-- Foreground ground strip to blend into footer -->
+            <g fill="#071022">
+                <rect x="0" y="120" width="800" height="20" />
+            </g>
+        </svg>
+    </div>
+
     <footer class="main-footer">
         <p>&copy; 2025 by Candy. All rights reserved.</p>
     </footer>
