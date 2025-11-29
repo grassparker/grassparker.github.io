@@ -175,36 +175,6 @@ body {
     color: inherit;
 }
 
-#retroFrame {
-    /* Set the background and padding for the frame to sit on */
-    background-color: #0A1931; /* Your deep background color */
-    padding: 10px; /* Space between the frame and the content inside */
-    margin: 20px auto;
-    max-width: 1000px; /* Optional: Constrain the frame width */
-    
-    /* --- 8-BIT BORDER IMAGE DEFINITIONS --- */
-    
-    /* 1. Set the border width */
-    border-width: 8px; 
-    border-style: solid; /* Must be set for border-image to work */
-    border-color: transparent;
-    
-    /* 2. Define the pixel pattern and slicing */
-    border-image: 
-        /* Uses a repeating linear gradient as the source image */
-        linear-gradient(
-            45deg, 
-            #185ADB 0%, #185ADB 25%, /* Vibrant Blue */
-            #FF4C68 25%, #FF4C68 50%, /* Neon Accent */
-            #185ADB 50%, #185ADB 75%,
-            #FF4C68 75%, #FF4C68 100%
-        ) 1 / 8px / 0 round; 
-        /* breakdown: [source] [slice] / [width] / [outset] [repeat] */
-
-    /* Make the corners sharp, not rounded */
-    border-radius: 0;
-}
-
 /* --- 6. Footer --- */
 .main-footer {
     background: #0A1931;
