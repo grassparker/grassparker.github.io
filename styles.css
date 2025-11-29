@@ -204,3 +204,16 @@ body {
         height: 110px;
     }
 }
+
+/* Star twinkle animation */
+.pixel-mountains svg .star {
+    fill: #FFF7D6;
+    opacity: 0.9;
+    animation: twinkle 2.8s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.6; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-1px); }
+    100% { opacity: 0.6; transform: translateY(0); }
+}
