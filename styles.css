@@ -18,7 +18,6 @@ a {
   font-style: normal;
 }
 
-<<<<<<< HEAD
 .cutive-mono-regular {
   font-family: "Cutive Mono", monospace;
   font-weight: 400;
@@ -28,11 +27,6 @@ a {
 body {
     background: linear-gradient(187deg,rgb(0, 0, 0) 0%, rgb(5, 5, 54) 66%, rgb(21, 43, 59) 100%);
     font-family: "Cutive Mono", monospace;
-=======
-body {
-    background: linear-gradient(187deg,rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 66%, rgb(21, 83, 128) 100%);
-    font-family: "Pixelify Sans", Arial, sans-serif;
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
     line-height: 1.6;
     background-color: #0A1931;
     color: #E0E7FF;
@@ -54,10 +48,7 @@ body {
     color: #E0E7FF;
     padding: 1rem 0;
     text-align: center;
-<<<<<<< HEAD
     font-family: "Pixelify Sans", sans-serif;
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 }
 
 .main-header h1 {
@@ -77,19 +68,13 @@ body {
 .hero h2 {
     margin-bottom: 4px;
     font-size: 36px;
-<<<<<<< HEAD
     font-family: "Pixelify Sans", sans-serif;
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 }
 
 .hero h3 {
     margin-bottom: 20px;
     font-size: 28px;
-<<<<<<< HEAD
     font-family: "Pixelify Sans", sans-serif;
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 }
 
 .hero p {
@@ -100,10 +85,7 @@ body {
     margin-top: 30px;
     margin-bottom: 10px;
     font-size: 24px;
-<<<<<<< HEAD
     font-family: "Pixelify Sans", sans-serif;
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 }
 
 .hero li {
@@ -114,10 +96,7 @@ body {
 /* Projects */
 #projectTitle {
     margin-bottom: 40px;
-<<<<<<< HEAD
     font-family: "Pixelify Sans", sans-serif;
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 }
 
 .projects {
@@ -129,14 +108,11 @@ body {
     margin: 50px;
 }
 
-<<<<<<< HEAD
 .InsideBoxTitle {
     font-family: "Pixelify Sans", sans-serif;
     margin-bottom: 10px;
 }
 
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 /*Loopform*/
 #Loopform {
     display: grid;
@@ -149,10 +125,6 @@ body {
     margin: 30px;
     transition: all 0.3s ease-in-out;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 #Loopform:hover {
     background: linear-gradient(187deg,rgb(106, 18, 207) 0%, rgb(66, 116, 177) 66%, rgb(193, 128, 16) 100%);
     border-color: #ad7beb;
@@ -172,10 +144,6 @@ body {
     margin: 30px;
     transition: all 0.3s ease-in-out;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 #Wordbuster:hover {
     background: linear-gradient(187deg,rgb(10, 102, 68) 0%, rgb(8, 60, 123) 66%, rgb(112, 214, 163) 100%);
     border-color: #2fa3a3;
@@ -195,10 +163,6 @@ body {
     margin: 30px;
     transition: all 0.3s ease-in-out;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 #StudiLib:hover {
     background: linear-gradient(187deg,rgb(159, 14, 164) 0%, rgb(130, 94, 208) 66%, rgb(16, 140, 193) 100%);
     border-color: #4365c4;
@@ -211,7 +175,6 @@ body {
     color: inherit;
 }
 
-<<<<<<< HEAD
 #retroFrame {
     /* Set the background and padding for the frame to sit on */
     background-color: #0A1931; /* Your deep background color */
@@ -242,8 +205,6 @@ body {
     border-radius: 0;
 }
 
-=======
->>>>>>> 29e4e651134949c12b3e7b5bec1a46bec5dbe9a6
 /* --- 6. Footer --- */
 .main-footer {
     background: #0A1931;
