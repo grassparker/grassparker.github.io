@@ -80,6 +80,18 @@
         <svg viewBox="0 0 800 140" preserveAspectRatio="none" role="img" aria-label="Pixel mountains at night with ice covered peaks">
             <defs>
                 <rect id="px" width="10" height="10" />
+                <style>
+                    .star {
+                        fill: #FFF7D6;
+                        opacity: 0.9;
+                        animation: twinkle 2.8s infinite ease-in-out;
+                    }
+                    @keyframes twinkle {
+                        0% { opacity: 0.6; }
+                        50% { opacity: 1; }
+                        100% { opacity: 0.6; }
+                    }
+                </style>
             </defs>
             <!-- Night sky stars (small pixel squares) -->
             <g id="stars" fill="#FFF7D6">
