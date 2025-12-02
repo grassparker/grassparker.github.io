@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Loop Shaper Console</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* Custom minimal styling on top of Tailwind */
+    .game-bg {
+      background: radial-gradient(circle at top, #1f2937 0%, #020617 55%, #000000 100%);
+    }
+
+    .portal-loop {
+      transition: transform 200ms ease, border-radius 200ms ease;
+    }
+
+    .target-loop {
+      border-style: dashed;
+    }
+
+    .console-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.8);
+    }
+
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 4px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: rgba(148, 163, 184, 0.7);
+      border-radius: 999px;
+    }
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    .cmd-badge {
+      border-radius: 999px;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ 
+ <body class="game-bg text-slate-100 font-sans">
+  <div class="w-full h-full flex flex-col items-center justify-center px-4 py-4">
+    <header class="w-full max-w-4xl mb-4">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex-1"></div>
+     <h1 id="title" class="text-center text-2xl md:text-3xl font-semibold tracking-wide text-cyan-100">Loop Align</h1>
+     <div class="flex-1 flex justify-end"><button id="headerRestartBtn" class="px-4 py-2 text-sm font-medium rounded-lg bg-slate-700 hover:bg-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 text-slate-100 transition-colors"> Restart </button>
+     </div>
+    </div>
+    <p id="subtitle" class="mt-1 text-center text-sm md:text-base text-slate-300">Shape the glowing loop using console commands until it hugs the faint outline.</p>
+   </header><!-- Game Over Popup -->
+   <div id="gameOverPopup" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
+    <div class="bg-slate-900 border-2 border-rose-500 rounded-2xl p-8 max-w-md w-full text-center">
+     <h2 class="text-3xl font-bold text-rose-400 mb-4">Game Over</h2>
+     <p class="text-slate-300 mb-6">You ran out of commands! Better luck next time.</p><button id="restartBtn" class="px-6 py-3 text-lg font-medium rounded-lg bg-cyan-500 hover:bg-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 text-slate-950 transition-colors"> Restart Game </button>
+    </div>
+   </div>
+   <div id="levelCompletePopup" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
+    <div class="bg-slate-900 border-2 border-emerald-500 rounded-2xl p-8 max-w-md w-full text-center">
+     <h2 class="text-3xl font-bold text-emerald-400 mb-4">Portal Aligned! 🌀</h2>
+     <p id="levelCompleteMessage" class="text-slate-300 mb-6">Great work! Ready for the next challenge?</p><button id="nextLevelBtn" class="px-6 py-3 text-lg font-medium rounded-lg bg-cyan-500 hover:bg-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 text-slate-950 transition-colors"> Next Level </button>
+    </div>
+   </div>
+   <main class="w-full max-w-4xl flex-1 flex flex-col md:flex-row gap-4"><!-- Visual canvas -->
+    <section aria-label="Loop puzzle area" class="flex-1 flex items-center justify-center">
+     <div class="relative flex items-center justify-center w-full max-w-md" style="height: 100%;"><!-- Container square to keep aspect ratio nice -->
+      <div class="relative w-full" style="padding-top: 100%;"><!-- Target outline -->
+       <div id="targetLoop" class="target-loop absolute inset-[18%] border-2 border-cyan-500/30 rounded-full" aria-hidden="true">
+       </div><!-- Player loop -->
+       <div id="playerLoop" class="portal-loop absolute inset-[18%] border-4 border-cyan-300 rounded-full" aria-hidden="true">
+       </div><!-- Portal glow when success -->
+       <div id="portalOverlay" class="pointer-events-none absolute inset-[18%] opacity-0 transition-opacity duration-300 rounded-full" style="box-shadow: 0 0 40px rgba(129,230,217,1);">
+       </div>
+      </div>
+     </div>
+    </section><!-- Console / controls -->
+    <aside aria-label="Console controls" class="w-full md:w-80 flex flex-col bg-slate-900/70 border border-slate-700 rounded-2xl p-4 gap-3"><!-- Level info -->
+     <div class="flex items-center justify-between gap-2">
+      <div>
+       <p class="text-xs uppercase tracking-widest text-slate-400">Level</p>
+       <p id="levelLabel" class="text-lg font-semibold text-cyan-100">1 / 4</p>
+      </div>
+      <div class="text-right">
+       <p class="text-xs uppercase tracking-widest text-slate-400">Commands Left</p>
+       <p id="commandsLeft" class="text-lg font-semibold text-amber-300">∞</p>
+      </div>
+     </div><!-- Status / hint -->
+     <div id="statusBox" class="rounded-xl border border-slate-700 bg-slate-800/80 px-3 py-2 text-xs md:text-sm text-slate-200">
+      Type <span class="font-mono text-emerald-300">HELP</span> to see available commands.
+     </div><!-- Console input -->
+     <form id="consoleForm" class="flex items-center gap-2 mt-1" autocomplete="off"><label for="commandInput" class="sr-only">Console command</label> <input id="commandInput" name="command" type="text" class="console-input flex-1 px-3 py-2 rounded-lg bg-slate-950/70 border border-slate-700 text-sm font-mono text-slate-100 placeholder-slate-500" placeholder="e.g. STRETCH 10, ROTATE 30" autocomplete="off"> <button type="submit" class="px-3 py-2 text-sm font-medium rounded-lg bg-cyan-500 hover:bg-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 text-slate-950 transition-colors"> Run </button>
+     </form><!-- Quick buttons -->
+     <div class="flex flex-wrap gap-2 mt-1"><button type="button" data-quick="RESET" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> RESET </button> <button type="button" data-quick="STRETCH 5" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> STRETCH 5 </button> <button type="button" data-quick="SHRINK 5" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> SHRINK 5 </button> <button type="button" data-quick="ROTATE 15" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> ROTATE 15 </button> <button type="button" data-quick="SKEWX 5" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> SKEWX 5 </button> <button type="button" data-quick="SKEWY 5" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> SKEWY 5 </button> <button type="button" data-quick="UNSKEW" class="text-xs px-3 py-1 cmd-badge border border-slate-600 text-slate-200 hover:bg-slate-800"> UNSKEW </button> <button type="button" data-quick="LOCK" class="text-xs px-3 py-1 cmd-badge border border-emerald-500 text-emerald-300 hover:bg-emerald-900/40"> LOCK </button>
+     </div><!-- Command log -->
+     <div class="flex-1 min-h-[120px] max-h-[180px] mt-2 rounded-xl border border-slate-700 bg-slate-950/50 overflow-hidden flex flex-col">
+      <div class="px-3 py-2 border-b border-slate-800 flex items-center justify-between"><span class="text-xs uppercase tracking-widest text-slate-400">Console Log</span> <button id="clearLogBtn" type="button" class="text-[11px] text-slate-400 hover:text-slate-200 underline"> Clear </button>
+      </div>
+      <div id="consoleLog" class="flex-1 px-3 py-2 overflow-y-auto text-[11px] leading-relaxed font-mono text-slate-300 scrollbar-thin">
+       Ready.
+      </div>
+     </div><!-- Help legend -->
+     <footer class="mt-1 text-[11px] text-slate-400">
+      Commands: STRETCH n, SHRINK n, ROTATE deg, SKEWX n, SKEWY n, UNSKEW, RESET, LOCK, HELP, NEXT.
+     </footer>
+    </aside>
+   </main>
+  </div>
+  <script>
+    // --- Core game state ---
+    const playerLoop = document.getElementById('playerLoop');
+    const targetLoop = document.getElementById('targetLoop');
+    const portalOverlay = document.getElementById('portalOverlay');
+    const statusBox = document.getElementById('statusBox');
+    const levelLabel = document.getElementById('levelLabel');
+    const commandsLeftEl = document.getElementById('commandsLeft');
+    const consoleForm = document.getElementById('consoleForm');
+    const commandInput = document.getElementById('commandInput');
+    const consoleLog = document.getElementById('consoleLog');
+    const clearLogBtn = document.getElementById('clearLogBtn');
+
+    const quickButtons = document.querySelectorAll('[data-quick]');
+
+    // Levels definition: each target is described relative to baseline circle
+    // Command limits: unlimited → 20���10 (levels 1-10), then 10→20 (levels 11-20)
+    // Tolerances are generous to make the game more fun and less frustrating
+    const levels = [
+      {
+        name: 'Warmup Ring',
+        target: { radius: 1.0, rotation: 0, skewX: 0, skewY: 0 },
+        tolerance: { radius: 0.15, rotation: 999, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 999
+      },
+      {
+        name: 'Gentle Oval',
+        target: { radius: 1.05, rotation: 15, skewX: 0.3, skewY: 0 },
+        tolerance: { radius: 0.15, rotation: 20, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 20
+      },
+      {
+        name: 'Slight Rotation',
+        target: { radius: 0.95, rotation: -30, skewX: 0, skewY: 0 },
+        tolerance: { radius: 0.15, rotation: 20, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 19
+      },
+      {
+        name: 'Vertical Stretch',
+        target: { radius: 1.0, rotation: 0, skewX: 0, skewY: 0.4 },
+        tolerance: { radius: 0.15, rotation: 20, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 18
+      },
+      {
+        name: 'Horizontal Stretch',
+        target: { radius: 1.0, rotation: 0, skewX: 0.4, skewY: 0 },
+        tolerance: { radius: 0.15, rotation: 20, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 17
+      },
+      {
+        name: 'Rotated Oval',
+        target: { radius: 1.05, rotation: 45, skewX: 0.3, skewY: 0 },
+        tolerance: { radius: 0.12, rotation: 18, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 16
+      },
+      {
+        name: 'Tall Portal',
+        target: { radius: 1.0, rotation: -20, skewX: 0, skewY: 0.5 },
+        tolerance: { radius: 0.12, rotation: 18, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 15
+      },
+      {
+        name: 'Wide Gate',
+        target: { radius: 0.95, rotation: 60, skewX: 0.5, skewY: 0 },
+        tolerance: { radius: 0.12, rotation: 18, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 14
+      },
+      {
+        name: 'Dual Skew',
+        target: { radius: 1.0, rotation: 30, skewX: 0.3, skewY: 0.3 },
+        tolerance: { radius: 0.12, rotation: 15, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 13
+      },
+      {
+        name: 'Twisted Ellipse',
+        target: { radius: 1.05, rotation: -45, skewX: 0.4, skewY: -0.2 },
+        tolerance: { radius: 0.12, rotation: 15, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 12
+      },
+      {
+        name: 'Asymmetric Oval',
+        target: { radius: 1.1, rotation: 75, skewX: -0.3, skewY: 0.4 },
+        tolerance: { radius: 0.12, rotation: 15, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 11
+      },
+      {
+        name: 'Precision Circle',
+        target: { radius: 1.0, rotation: 0, skewX: 0, skewY: 0 },
+        tolerance: { radius: 0.1, rotation: 10, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 10
+      },
+      {
+        name: 'Narrow Horizontal',
+        target: { radius: 0.95, rotation: -15, skewX: 0.6, skewY: 0 },
+        tolerance: { radius: 0.1, rotation: 12, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 11
+      },
+      {
+        name: 'Tall Vertical',
+        target: { radius: 1.05, rotation: 15, skewX: 0, skewY: 0.6 },
+        tolerance: { radius: 0.1, rotation: 12, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 12
+      },
+      {
+        name: 'Complex Warp',
+        target: { radius: 1.0, rotation: -60, skewX: 0.5, skewY: -0.3 },
+        tolerance: { radius: 0.1, rotation: 12, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 13
+      },
+      {
+        name: 'Compact Portal',
+        target: { radius: 0.85, rotation: 90, skewX: 0.3, skewY: 0.3 },
+        tolerance: { radius: 0.1, rotation: 12, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 14
+      },
+      {
+        name: 'Stretched Oval',
+        target: { radius: 1.15, rotation: -75, skewX: 0.6, skewY: 0.4 },
+        tolerance: { radius: 0.1, rotation: 12, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 15
+      },
+      {
+        name: 'Inverse Warp',
+        target: { radius: 0.9, rotation: 120, skewX: -0.4, skewY: 0.5 },
+        tolerance: { radius: 0.1, rotation: 12, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 16
+      },
+      {
+        name: 'Triple Challenge',
+        target: { radius: 1.1, rotation: -100, skewX: 0.5, skewY: 0.4 },
+        tolerance: { radius: 0.08, rotation: 10, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 18
+      },
+      {
+        name: 'Master Portal',
+        target: { radius: 1.05, rotation: -105, skewX: 0.6, skewY: -0.5 },
+        tolerance: { radius: 0.08, rotation: 10, skewX: 2.0, skewY: 2.0 },
+        maxCommands: 20
+      }
+    ];
+
+    let currentLevelIndex = 0;
+
+    const defaultState = {
+      radius: 0.85,
+      rotation: 45,
+      skewX: 0.3,
+      skewY: 0.2,
+    };
+
+    let loopState = { ...defaultState };
+    let commandsUsed = 0;
+    let levelComplete = false;
+
+    function showGameOverPopup() {
+      const popup = document.getElementById('gameOverPopup');
+      popup.classList.remove('hidden');
+    }
+
+    function logMessage(text) {
+      const line = document.createElement('div');
+      line.textContent = text;
+      consoleLog.appendChild(line);
+      consoleLog.scrollTop = consoleLog.scrollHeight;
+    }
+
+    function setStatus(message, tone = 'neutral') {
+      statusBox.textContent = message;
+      statusBox.classList.remove('border-sky-400/70', 'border-emerald-400/70', 'border-rose-400/70');
+      if (tone === 'success') {
+        statusBox.classList.add('border-emerald-400/70');
+      } else if (tone === 'error') {
+        statusBox.classList.add('border-rose-400/70');
+      } else {
+        statusBox.classList.add('border-sky-400/70');
+      }
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function normalizeDegrees(deg) {
+      let d = deg % 360;
+      if (d > 180) d -= 360;
+      if (d <= -180) d += 360;
+      return d;
+    }
+
+    function updateHUD() {
+      const level = levels[currentLevelIndex];
+      levelLabel.textContent = (currentLevelIndex + 1) + ' / ' + levels.length;
+      if (level.maxCommands >= 999) {
+        commandsLeftEl.textContent = '∞';
+      } else {
+        commandsLeftEl.textContent = (level.maxCommands - commandsUsed).toString();
+      }
+    }
+
+    function applyLoopTransform() {
+      // Skew implemented as elliptical scaling with separate X and Y
+      const radiusScale = loopState.radius;
+      
+      // Map skewX value to horizontal aspect ratio
+      const skewXAmount = clamp(loopState.skewX, -1.2, 1.2);
+      const baseWidthX = 1 + Math.abs(skewXAmount) * 0.9;
+      const baseHeightX = 1 - Math.abs(skewXAmount) * 0.5;
+      const widthScaleX = skewXAmount >= 0 ? baseWidthX : baseHeightX;
+      const heightScaleX = skewXAmount >= 0 ? baseHeightX : baseWidthX;
+      
+      // Map skewY value to vertical aspect ratio
+      const skewYAmount = clamp(loopState.skewY, -1.2, 1.2);
+      const baseWidthY = 1 - Math.abs(skewYAmount) * 0.5;
+      const baseHeightY = 1 + Math.abs(skewYAmount) * 0.9;
+      const widthScaleY = skewYAmount >= 0 ? baseWidthY : baseHeightY;
+      const heightScaleY = skewYAmount >= 0 ? baseHeightY : baseWidthY;
+      
+      // Combine both skew effects
+      const finalWidthScale = widthScaleX * widthScaleY;
+      const finalHeightScale = heightScaleX * heightScaleY;
+
+      const transform = `rotate(${loopState.rotation}deg) scale(${radiusScale * finalWidthScale}, ${radiusScale * finalHeightScale})`;
+      playerLoop.style.transform = transform;
+      portalOverlay.style.transform = transform;
+    }
+
+    function applyTargetVisual() {
+      const level = levels[currentLevelIndex];
+      const target = level.target;
+      const radiusScale = target.radius;
+      
+      // Map skewX value to horizontal aspect ratio
+      const skewXAmount = clamp(target.skewX, -1.2, 1.2);
+      const baseWidthX = 1 + Math.abs(skewXAmount) * 0.9;
+      const baseHeightX = 1 - Math.abs(skewXAmount) * 0.5;
+      const widthScaleX = skewXAmount >= 0 ? baseWidthX : baseHeightX;
+      const heightScaleX = skewXAmount >= 0 ? baseHeightX : baseWidthX;
+      
+      // Map skewY value to vertical aspect ratio
+      const skewYAmount = clamp(target.skewY, -1.2, 1.2);
+      const baseWidthY = 1 - Math.abs(skewYAmount) * 0.5;
+      const baseHeightY = 1 + Math.abs(skewYAmount) * 0.9;
+      const widthScaleY = skewYAmount >= 0 ? baseWidthY : baseHeightY;
+      const heightScaleY = skewYAmount >= 0 ? baseHeightY : baseWidthY;
+      
+      // Combine both skew effects
+      const finalWidthScale = widthScaleX * widthScaleY;
+      const finalHeightScale = heightScaleX * heightScaleY;
+
+      const transform = `rotate(${target.rotation}deg) scale(${radiusScale * finalWidthScale}, ${radiusScale * finalHeightScale})`;
+      targetLoop.style.transform = transform;
+    }
+
+    function resetLoopState() {
+      loopState = { ...defaultState };
+      applyLoopTransform();
+      portalOverlay.style.opacity = '0';
+      levelComplete = false;
+      setStatus('Shape reset. Realign with the outline and LOCK when ready.', 'neutral');
+      logMessage('> RESET');
+    }
+
+    function isMatch() {
+      const level = levels[currentLevelIndex];
+      const target = level.target;
+      const tol = level.tolerance;
+
+      const radiusDiff = Math.abs(loopState.radius - target.radius);
+      const skewXDiff = Math.abs(loopState.skewX - target.skewX);
+      const skewYDiff = Math.abs(loopState.skewY - target.skewY);
+
+      // For rotation, check visual overlap by sampling points around the ellipse
+      // This matches how humans judge alignment by eye
+      const visualOverlap = calculateVisualOverlap(loopState, target);
+      
+      return (
+        radiusDiff <= tol.radius &&
+        skewXDiff <= tol.skewX &&
+        skewYDiff <= tol.skewY &&
+        visualOverlap >= 0.85 // 85% visual overlap required
+      );
+    }
+
+    function calculateVisualOverlap(state1, state2) {
+      // Sample points around the ellipse perimeter
+      const numSamples = 36; // Check 36 points (every 10 degrees)
+      let matchingPoints = 0;
+
+      for (let i = 0; i < numSamples; i++) {
+        const angle = (i / numSamples) * 2 * Math.PI;
+        
+        // Get point on first ellipse
+        const point1 = getEllipsePoint(state1, angle);
+        
+        // Check if this point is close to the second ellipse
+        const distToSecond = distanceToEllipse(point1, state2);
+        
+        // If distance is small relative to size, count as matching
+        const threshold = 0.08; // 8% of base size
+        if (distToSecond < threshold) {
+          matchingPoints++;
+        }
+      }
+
+      return matchingPoints / numSamples;
+    }
+
+    function getEllipsePoint(state, angle) {
+      // Calculate ellipse dimensions
+      const radiusScale = state.radius;
+      const skewXAmount = clamp(state.skewX, -1.2, 1.2);
+      const baseWidthX = 1 + Math.abs(skewXAmount) * 0.9;
+      const baseHeightX = 1 - Math.abs(skewXAmount) * 0.5;
+      const widthScaleX = skewXAmount >= 0 ? baseWidthX : baseHeightX;
+      const heightScaleX = skewXAmount >= 0 ? baseHeightX : baseWidthX;
+      
+      const skewYAmount = clamp(state.skewY, -1.2, 1.2);
+      const baseWidthY = 1 - Math.abs(skewYAmount) * 0.5;
+      const baseHeightY = 1 + Math.abs(skewYAmount) * 0.9;
+      const widthScaleY = skewYAmount >= 0 ? baseWidthY : baseHeightY;
+      const heightScaleY = skewYAmount >= 0 ? baseHeightY : baseWidthY;
+      
+      const finalWidthScale = widthScaleX * widthScaleY * radiusScale;
+      const finalHeightScale = heightScaleX * heightScaleY * radiusScale;
+
+      // Point on unrotated ellipse
+      const x = Math.cos(angle) * finalWidthScale;
+      const y = Math.sin(angle) * finalHeightScale;
+
+      // Rotate by state rotation
+      const rotRad = (state.rotation * Math.PI) / 180;
+      const cosRot = Math.cos(rotRad);
+      const sinRot = Math.sin(rotRad);
+
+      return {
+        x: x * cosRot - y * sinRot,
+        y: x * sinRot + y * cosRot
+      };
+    }
+
+    function distanceToEllipse(point, state) {
+      // Rotate point back to ellipse's local space
+      const rotRad = (-state.rotation * Math.PI) / 180;
+      const cosRot = Math.cos(rotRad);
+      const sinRot = Math.sin(rotRad);
+      const localX = point.x * cosRot - point.y * sinRot;
+      const localY = point.x * sinRot + point.y * cosRot;
+
+      // Calculate ellipse dimensions
+      const radiusScale = state.radius;
+      const skewXAmount = clamp(state.skewX, -1.2, 1.2);
+      const baseWidthX = 1 + Math.abs(skewXAmount) * 0.9;
+      const baseHeightX = 1 - Math.abs(skewXAmount) * 0.5;
+      const widthScaleX = skewXAmount >= 0 ? baseWidthX : baseHeightX;
+      const heightScaleX = skewXAmount >= 0 ? baseHeightX : baseWidthX;
+      
+      const skewYAmount = clamp(state.skewY, -1.2, 1.2);
+      const baseWidthY = 1 - Math.abs(skewYAmount) * 0.5;
+      const baseHeightY = 1 + Math.abs(skewYAmount) * 0.9;
+      const widthScaleY = skewYAmount >= 0 ? baseWidthY : baseHeightY;
+      const heightScaleY = skewYAmount >= 0 ? baseHeightY : baseWidthY;
+      
+      const a = widthScaleX * widthScaleY * radiusScale;
+      const b = heightScaleX * heightScaleY * radiusScale;
+
+      // Approximate distance to ellipse
+      // For a point (x,y) and ellipse with semi-axes a,b:
+      // Normalize and find closest point
+      const normalizedDist = Math.sqrt((localX * localX) / (a * a) + (localY * localY) / (b * b));
+      
+      // Distance from point to ellipse surface
+      const pointDist = Math.sqrt(localX * localX + localY * localY);
+      return Math.abs(pointDist - pointDist / normalizedDist);
+    }
+
+    function handleLock() {
+      const level = levels[currentLevelIndex];
+
+      if (levelComplete) {
+        setStatus('Portal already open. Type NEXT to move on.', 'success');
+        logMessage('> LOCK (already completed)');
+        return;
+      }
+
+      commandsUsed++;
+      updateHUD();
+
+      if (isMatch()) {
+        levelComplete = true;
+        portalOverlay.style.opacity = '1';
+        setStatus('Portal aligned! Type NEXT for the next loop.', 'success');
+        logMessage('> LOCK  🌀 Portal opened');
+        
+        // Show level complete popup
+        const popup = document.getElementById('levelCompletePopup');
+        const message = document.getElementById('levelCompleteMessage');
+        if (currentLevelIndex < levels.length - 1) {
+          message.textContent = `Level ${currentLevelIndex + 1} complete! Ready for the next challenge?`;
+        } else {
+          message.textContent = 'Congratulations! You completed all levels!';
+          document.getElementById('nextLevelBtn').textContent = 'Play Again';
+        }
+        popup.classList.remove('hidden');
+      } else {
+        // Calculate how close we are
+        const target = level.target;
+        const tol = level.tolerance;
+        
+        const radiusDiff = Math.abs(loopState.radius - target.radius);
+        const skewXDiff = Math.abs(loopState.skewX - target.skewX);
+        const skewYDiff = Math.abs(loopState.skewY - target.skewY);
+        const rotDiff = Math.abs(normalizeDegrees(loopState.rotation - target.rotation));
+        
+        // Check if we're close (within 3x tolerance but not within 1x tolerance)
+        const radiusClose = radiusDiff > tol.radius && radiusDiff <= tol.radius * 3;
+        const rotClose = rotDiff > tol.rotation && rotDiff <= tol.rotation * 3;
+        const skewXClose = skewXDiff > tol.skewX && skewXDiff <= tol.skewX * 1.5;
+        const skewYClose = skewYDiff > tol.skewY && skewYDiff <= tol.skewY * 1.5;
+        
+        // Build hint message
+        let hints = [];
+        if (radiusClose) {
+          if (loopState.radius < target.radius) {
+            hints.push('needs more STRETCH');
+          } else {
+            hints.push('needs more SHRINK');
+          }
+        }
+        if (rotClose) {
+          const rotNeeded = normalizeDegrees(target.rotation - loopState.rotation);
+          if (Math.abs(rotNeeded) > 5) {
+            hints.push(`rotate ${rotNeeded > 0 ? '+' : ''}${Math.round(rotNeeded)}°`);
+          }
+        }
+        if (skewXClose) {
+          if (loopState.skewX < target.skewX) {
+            hints.push('more SKEWX');
+          } else if (loopState.skewX > target.skewX) {
+            hints.push('less SKEWX');
+          }
+        }
+        if (skewYClose) {
+          if (loopState.skewY < target.skewY) {
+            hints.push('more SKEWY');
+          } else if (loopState.skewY > target.skewY) {
+            hints.push('less SKEWY');
+          }
+        }
+        
+        // Slight visual "shake" feedback via CSS class + timeout
+        playerLoop.classList.add('animate-pulse');
+        setTimeout(() => playerLoop.classList.remove('animate-pulse'), 200);
+
+        if (hints.length > 0) {
+          const hintText = 'Close! Try: ' + hints.join(', ');
+          setStatus(hintText, 'error');
+          logMessage('> LOCK  ✗ ' + hintText);
+        } else {
+          setStatus('Not quite. Adjust and try LOCK again.', 'error');
+          logMessage('> LOCK  ✗ Misaligned');
+        }
+      }
+    }
+
+    function handleNext() {
+      if (!levelComplete) {
+        setStatus('You need to LOCK a matching shape before moving on.', 'error');
+        logMessage('> NEXT blocked (portal not open)');
+        return;
+      }
+
+      if (currentLevelIndex < levels.length - 1) {
+        currentLevelIndex++;
+        commandsUsed = 0;
+        levelComplete = false;
+        portalOverlay.style.opacity = '0';
+        applyTargetVisual();
+        loopState = { ...defaultState };
+        applyLoopTransform();
+        updateHUD();
+        setStatus('New outline loaded. Console is yours.', 'neutral');
+        logMessage('> NEXT  → Level ' + (currentLevelIndex + 1));
+      } else {
+        setStatus('All portals aligned. You mastered the loop.', 'success');
+        logMessage('> NEXT  (no more levels)');
+      }
+    }
+
+    function showHelp() {
+      const helpText =
+        'Commands:\n' +
+        '  STRETCH n  — increase radius (n≈1–20)\n' +
+        '  SHRINK n   — decrease radius\n' +
+        '  ROTATE deg — rotate loop (-180 to 180)\n' +
+        '  SKEWX n    — horizontal skew (wider/narrower)\n' +
+        '  SKEWY n    — vertical skew (taller/shorter)\n' +
+        '  UNSKEW     — remove all skew (back to circle)\n' +
+        '  RESET      — default circle\n' +
+        '  LOCK       — check alignment\n' +
+        '  NEXT       — advance if portal open';
+      logMessage(helpText);
+      setStatus('Use STRETCH, SHRINK, ROTATE, SKEWX, SKEWY, UNSKEW, RESET, LOCK, NEXT, HELP.', 'neutral');
+    }
+
+    function executeCommand(rawInput) {
+      const input = rawInput.trim();
+      if (!input) return;
+
+      const level = levels[currentLevelIndex];
+
+      // Log command
+      logMessage('> ' + input.toUpperCase());
+
+      // Non-counted commands: HELP, NEXT?
+      const [cmdRaw, ...rest] = input.split(/\s+/);
+      const cmd = cmdRaw.toUpperCase();
+      const argText = rest.join(' ');
+      const argNum = argText ? Number(argText) : NaN;
+
+      // HELP never counts
+      if (cmd === 'HELP') {
+        showHelp();
+        return;
+      }
+
+      // NEXT doesn't count toward command cap (you already solved)
+      if (cmd === 'NEXT') {
+        handleNext();
+        return;
+      }
+
+      // Check commands left (only for shape-changing/locking commands)
+      if (level.maxCommands < 999 && commandsUsed >= level.maxCommands) {
+        setStatus('Game Over! You ran out of commands.', 'error');
+        logMessage('  ✗ GAME OVER - No commands remaining');
+        // Disable further input
+        commandInput.disabled = true;
+        quickButtons.forEach(btn => btn.disabled = true);
+        // Show game over popup
+        showGameOverPopup();
+        return;
+      }
+
+      if (cmd === 'RESET') {
+        commandsUsed++;
+        updateHUD();
+        resetLoopState();
+        return;
+      }
+
+      if (cmd === 'LOCK') {
+        handleLock();
+        return;
+      }
+
+      if (cmd === 'UNSKEW') {
+        commandsUsed++;
+        loopState.skewX = 0;
+        loopState.skewY = 0;
+        applyLoopTransform();
+        updateHUD();
+        logMessage('  → skew reset to 0');
+        setStatus('Skew removed. Shape is now circular.', 'neutral');
+        return;
+      }
+
+      // From this point, we expect numeric argument
+      if (['STRETCH', 'SHRINK', 'ROTATE', 'SKEWX', 'SKEWY'].includes(cmd)) {
+        if (Number.isNaN(argNum)) {
+          setStatus('That command needs a number. Try e.g. STRETCH 10.', 'error');
+          logMessage('  (missing number)');
+          return;
+        }
+      }
+
+      // Apply command
+      let changed = false;
+
+      switch (cmd) {
+        case 'STRETCH': {
+          const delta = argNum / 100;
+          loopState.radius = clamp(loopState.radius + delta, 0.4, 1.8);
+          changed = true;
+          break;
+        }
+        case 'SHRINK': {
+          const delta = argNum / 100;
+          loopState.radius = clamp(loopState.radius - delta, 0.4, 1.8);
+          changed = true;
+          break;
+        }
+        case 'ROTATE': {
+          loopState.rotation = normalizeDegrees(loopState.rotation + argNum);
+          changed = true;
+          break;
+        }
+        case 'SKEWX': {
+          const delta = argNum / 20;
+          loopState.skewX = clamp(loopState.skewX + delta, -1.2, 1.2);
+          changed = true;
+          break;
+        }
+        case 'SKEWY': {
+          const delta = argNum / 20;
+          loopState.skewY = clamp(loopState.skewY + delta, -1.2, 1.2);
+          changed = true;
+          break;
+        }
+        default: {
+          setStatus('Unknown command. Type HELP to see options.', 'error');
+          logMessage('  (unknown command)');
+          return;
+        }
+      }
+
+      if (changed) {
+        commandsUsed++;
+        applyLoopTransform();
+        updateHUD();
+
+        const stateSummary =
+          `  → radius:${loopState.radius.toFixed(2)}  ` +
+          `rot:${normalizeDegrees(loopState.rotation).toFixed(0)}°  ` +
+          `skewX:${loopState.skewX.toFixed(2)}  ` +
+          `skewY:${loopState.skewY.toFixed(2)}`;
+        logMessage(stateSummary);
+
+        setStatus('Shape updated. Try LOCK when you think it fits.', 'neutral');
+      }
+    }
+
+    // --- Wire up console form ---
+    consoleForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = commandInput.value;
+      commandInput.value = '';
+      executeCommand(value);
+      commandInput.focus();
+    });
+
+    clearLogBtn.addEventListener('click', () => {
+      consoleLog.textContent = 'Ready.';
+    });
+
+    quickButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cmd = btn.getAttribute('data-quick') || '';
+        commandInput.value = cmd;
+        commandInput.focus();
+      });
+    });
+
+    // Restart buttons
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      location.reload();
+    });
+    
+    document.getElementById('headerRestartBtn').addEventListener('click', () => {
+      location.reload();
+    });
+
+    // Next level button
+    document.getElementById('nextLevelBtn').addEventListener('click', () => {
+      const popup = document.getElementById('levelCompletePopup');
+      popup.classList.add('hidden');
+      
+      if (currentLevelIndex < levels.length - 1) {
+        handleNext();
+      } else {
+        // Restart game if all levels complete
+        location.reload();
+      }
+    });
+
+    // Initial setup
+    applyTargetVisual();
+    applyLoopTransform();
+    updateHUD();
+    setStatus('Demo Level: Unlimited commands! Type HELP to learn. Try STRETCH, ROTATE, SKEWX, SKEWY, then LOCK.', 'neutral');
+  </script>
+  </body>
+</html>
