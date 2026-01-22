@@ -184,12 +184,12 @@ body {
     gap: 20px;
 }
 
-/* Collapsible Year Styles */
-.collapsible-year {
+/* Collapsible Feature Styles */
+.collapsible-feature {
     margin-bottom: 15px;
 }
 
-.year-toggle {
+.feature-toggle {
     background: rgba(233, 69, 96, 0.2);
     border: 1px solid #e94560;
     color: #e94560;
@@ -203,18 +203,18 @@ body {
     transition: all 0.3s ease;
 }
 
-.year-toggle:hover {
+.feature-toggle:hover {
     background: rgba(233, 69, 96, 0.3);
 }
 
-.year-content {
+.feature-content {
     list-style-type: none;
     display: block;
     padding-left: 0;
     margin-top: 8px;
 }
 
-.year-content li {
+.feature-content li {
     margin-bottom: 10px;
     padding: 10px;
     background: rgba(233, 69, 96, 0.05);

@@ -37,17 +37,17 @@
             <aside class="sidebar-left">
                 <h3>Recent Updates</h3>
 
-                <div class="collapsible-year">
-                    <button class="year-toggle">▼ Places</button>
-                    <ul class="year-content">
+                <div class="collapsible-feature">
+                    <button class="feature-toggle">▼ Places</button>
+                    <ul class="feature-content">
                         <li><b>Study Town</b> – Explore the Study Town feature.</li>
                         <li><b>Dorm</b> – Focus, conquer challenges and build your own little home.</li>
                     </ul>
                 </div>
 
-                <div class="collapsible-year">
-                    <button class="year-toggle">▶ Features</button>
-                    <ul class="year-content" style="display: none;">
+                <div class="collapsible-feature">
+                    <button class="feature-toggle">▶ Features</button>
+                    <ul class="feature-content" style="display: none;">
                         <li><b>Timer</b> – Start your very first pomo.</li>
                         <li><b>Group call</b> – Call your best pals.</li>
                     </ul>
@@ -93,7 +93,7 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.year-toggle').forEach(button => {
+       document.querySelectorAll('.feature-toggle').forEach(button => {
             button.addEventListener('click', function() {
                 const content = this.nextElementSibling;
                 const isHidden = content.style.display === 'none';

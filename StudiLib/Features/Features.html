@@ -36,22 +36,7 @@
         <div class="magazine-layout">
             <aside class="sidebar-left">
                 <h3>Recent Updates</h3>
-
-                <div class="collapsible-year">
-                    <button class="year-toggle">▼ 2025</button>
-                    <ul class="year-content">
-                        <li><b>Version 1.0</b> – Initial release of StudiLib with core features.</li>
-                        <li><b>Version 1.1</b> – Bug fixes and performance improvements.</li>
-                    </ul>
-                </div>
-
-                <div class="collapsible-year">
-                    <button class="year-toggle">▶ 2024</button>
-                    <ul class="year-content" style="display: none;">
-                        <li><b>Beta Launch</b> – Closed beta testing with select users.</li>
-                        <li><b>Alpha Release</b> – Early development version released.</li>
-                    </ul>
-                </div>
+                <div id="updates-container"></div>
             </aside>
 
         <section class="main-content">
@@ -93,15 +78,42 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.year-toggle').forEach(button => {
-            button.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const isHidden = content.style.display === 'none';
+        // Load and render updates from JSON
+        fetch('updates.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('updates-container');
                 
-                content.style.display = isHidden ? 'block' : 'none';
-                this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
+                data.updates.forEach((yearGroup, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'collapsible-year';
+                    
+                    const isFirstYear = index === 0;
+                    const button = document.createElement('button');
+                    button.className = 'year-toggle';
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
+                    
+                    const ul = document.createElement('ul');
+                    ul.className = 'year-content';
+                    ul.style.display = isFirstYear ? 'block' : 'none';
+                    
+                    yearGroup.items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<b>${item.version}</b> (${item.date}) – ${item.description}`;
+                        ul.appendChild(li);
+                    });
+                    
+                    button.addEventListener('click', function() {
+                        const isHidden = ul.style.display === 'none';
+                        ul.style.display = isHidden ? 'block' : 'none';
+                        this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
+                    });
+                    
+                    div.appendChild(button);
+                    div.appendChild(ul);
+                    container.appendChild(div);
+                });
             });
-        });
     </script>
 </body>
 </html>
