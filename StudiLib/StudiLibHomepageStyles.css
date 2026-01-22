@@ -101,6 +101,45 @@ body {
     }
 }
 
+/* Collapsible Year Styles */
+.collapsible-year {
+    margin-bottom: 15px;
+}
+
+.year-toggle {
+    background: rgba(233, 69, 96, 0.2);
+    border: 1px solid #e94560;
+    color: #e94560;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: "Pixelify Sans", sans-serif;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.year-toggle:hover {
+    background: rgba(233, 69, 96, 0.3);
+}
+
+.year-content {
+    list-style-type: none;
+    display: block;
+    padding-left: 0;
+    margin-top: 8px;
+}
+
+.year-content li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: rgba(233, 69, 96, 0.05);
+    border-left: 3px solid #e94560;
+    padding-left: 12px;
+    font-size: 14px;
+}
+
 /*Header*/
 .main-header {
     color: #e94560;

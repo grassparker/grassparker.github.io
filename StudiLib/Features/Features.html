@@ -28,7 +28,7 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="../StudiLib.html">Home</a></li>
-                <li><a href="Features.html">Features</a></li>
+                <li><a href="Features.html">Updates</a></li>
                 <li><a href="../documentation/Documentation.html">Documentation</a></li>
             </ul>
         </nav>
@@ -42,23 +42,15 @@
         <section class="main-content">
             <section class="hero">
 
-                <h2>Welcome to StudiLib!</h2>
+                <h2>Features</h2>
 
-                <h3>Your Ultimate Study Companion</h3>
-            
-                <p class="Import-text">An integrated study platform designed to enhance academic collaboration and student well-being. By facilitating goal-setting and synchronized group sessions, the application fosters a productive community environment that mitigates the isolation of independent study.</p>
+                <p class="Import-text">You will find information about features as well as updates on this page.</p>
 
-                <h3 class="liTitle">Key Features:</h3>
-                <ul>
-                    <li><b>📅 Schedule Study Sessions</b> – plan group study times and never miss a session.</li>
-                    <li><b>👥 Group Dashboard</b> – see what your friends are studying and their current status.</li>
-                    <li><b>🎧 Join Voice Calls</b> – hop into group calls and study together in real time.</li>
-                    <li><b>⏱️ Shared Timer</b> – sync Pomodoro or focus sessions with your friends.</li>
-                    <li><b>✅ Set Goals</b> – create daily or weekly study goals and track progress.</li>
-                    <li><b>🔔 Gentle Reminders</b> – get nudged when it’s time to study or take a break.</li>
-                    <li><b>📊 Quick Stats</b> – see how much your group studied today or this week.</li>
-                    <li><b>💬 Light Chat / Notes</b> – jot quick messages or reminders for the group.</li>
-                </ul>
+                <div id="newest-updates">
+                    <!-- Updates will be loaded here dynamically -->
+
+
+                </div>
 
                 <h3 class="liTitle">Get Started Today!</h3>
 
@@ -72,12 +64,31 @@
         <p>&copy; 2025 by Candy. All rights reserved.</p>
 
         <ul class="nav-links">
-            <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-            <li><a href="TermsAndServices.html">Terms and Services</a></li>
+            <li><a href="../PrivacyPolicy.html">Privacy Policy</a></li>
+            <li><a href="../TermsAndServices.html">Terms and Services</a></li>
         </ul>
     </footer>
 
     <script>
+        // Load newest update
+        fetch('updates.json')
+            .then(response => response.json())
+            .then(data => {
+                const newestYear = data.updates[0];
+                const newestItem = newestYear.items[0];
+                
+                const html = `
+                    <div class="newest-update-card">
+                        <h3>${newestItem.version}</h3>
+                        <p class="date">${newestItem.date}</p>
+                        <p class="description">${newestItem.description}</p>
+                        <a href="UpdateDetails.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">Read More →</a>
+                    </div>
+                `;
+                
+                document.getElementById('newest-updates').innerHTML = html;
+            });
+
         // Load and render updates from JSON
         fetch('updates.json')
             .then(response => response.json())
@@ -99,7 +110,7 @@
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<b>${item.version}</b> (${item.date}) – ${item.description}`;
+                        li.innerHTML = `<a href="UpdateDetails.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
                         ul.appendChild(li);
                     });
                     

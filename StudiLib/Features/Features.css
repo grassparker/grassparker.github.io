@@ -222,3 +222,54 @@ body {
     padding-left: 12px;
     font-size: 14px;
 }
+
+/* Newest Update Card */
+.newest-update-card {
+    background: rgba(233, 69, 96, 0.1);
+    border: 2px solid #e94560;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.newest-update-card h3 {
+    color: #e94560;
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+.newest-update-card .date {
+    color: #a0a0a0;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.newest-update-card .description {
+    color: #e8dcc8;
+    margin-bottom: 15px;
+}
+
+.newest-update-card .read-more {
+    color: #e94560;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.newest-update-card .read-more:hover {
+    color: #e8dcc8;
+}
+
+/* Update Links in Sidebar */
+.update-link {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.update-link:hover {
+    color: #e8dcc8;
+    text-decoration: underline;
+}

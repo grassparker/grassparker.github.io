@@ -28,7 +28,7 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="StudiLib.html">Home</a></li>
-                <li><a href="Features/Features.html">Features</a></li>
+                <li><a href="Features/Features.html">Updates</a></li>
                 <li><a href="documentation/Documentation.html">Documentation</a></li>
             </ul>
         </nav>
@@ -36,10 +36,7 @@
         <div class="magazine-layout">
             <aside class="sidebar-left">
                 <h3>Recent Updates</h3>
-
-                <ul>
-                    <li><b>Version 1.0</b> – Initial release of StudiLib with core features.</li>
-                </ul>
+                <div id="updates-container"></div>
             </aside>
 
         <section class="main-content">
@@ -73,10 +70,7 @@
             <h3>Blogs</h3>
 
             <ul>
-                <li><a href="Features/Features.html">Explore Features</a></li>
-                <li><a href="documentation/Documentation.html">Read Documentation</a></li>
-                <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-                <li><a href="TermsAndServices.html">Terms of Service</a></li>
+                <li>Under construction</li>
             </ul>
         </aside>
     </div>
@@ -90,5 +84,44 @@
             <li><a href="TermsAndServices.html">Terms and Services</a></li>
         </ul>
     </footer>
+
+    <script>
+        // Load and render updates from JSON
+        fetch('Features/updates.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('updates-container');
+                
+                data.updates.forEach((yearGroup, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'collapsible-year';
+                    
+                    const isFirstYear = index === 0;
+                    const button = document.createElement('button');
+                    button.className = 'year-toggle';
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
+                    
+                    const ul = document.createElement('ul');
+                    ul.className = 'year-content';
+                    ul.style.display = isFirstYear ? 'block' : 'none';
+                    
+                    yearGroup.items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="Features/UpdateDetails.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
+                        ul.appendChild(li);
+                    });
+                    
+                    button.addEventListener('click', function() {
+                        const isHidden = ul.style.display === 'none';
+                        ul.style.display = isHidden ? 'block' : 'none';
+                        this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
+                    });
+                    
+                    div.appendChild(button);
+                    div.appendChild(ul);
+                    container.appendChild(div);
+                });
+            });
+    </script>
 </body>
 </html>

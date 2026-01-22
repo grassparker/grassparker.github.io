@@ -4,24 +4,35 @@
       "year": 2025,
       "items": [
         {
+          "version": "Version 1.4",
+          "date": "Mar 20, 2025",
+          "description": "Introduced AI-powered study assistant",
+          "details": "Version 1.4 introduces an AI-powered study assistant that helps you create personalized study plans, suggests resources based on your subjects, and provides real-time assistance during study sessions. This feature aims to enhance your productivity and learning experience."
+
+        },
+        {
           "version": "Version 1.3",
           "date": "Feb 10, 2025",
-          "description": "Introduced dark mode and enhanced security features"
+          "description": "Introduced dark mode and enhanced security features",
+          "details": "Version 1.3 brings a complete visual overhaul with dark mode for better eye comfort during long study sessions. We've also implemented enhanced security protocols to protect user data and added two-factor authentication for account protection."
         },
         {
           "version": "Version 1.2",
           "date": "Jan 15, 2025",
-          "description": "Added real-time notifications and improved UI"
+          "description": "Added real-time notifications and improved UI",
+          "details": "Real-time notifications keep you updated when friends join study sessions or when it's time for your scheduled break. The UI has been completely redesigned for better usability and a more intuitive experience."
         },
         {
           "version": "Version 1.1",
           "date": "Jan 5, 2025",
-          "description": "Bug fixes and performance improvements"
+          "description": "Bug fixes and performance improvements",
+          "details": "This update focused on stability and performance. We fixed critical bugs related to session management and optimized the app for faster load times and smoother interactions."
         },
         {
           "version": "Version 1.0",
           "date": "Dec 20, 2024",
-          "description": "Initial release with core features"
+          "description": "Initial release with core features",
+          "details": "The official launch of StudiLib! This release includes all core features: group study sessions, shared timers, voice calls, goal tracking, and community dashboard."
         }
       ]
     },
@@ -31,12 +42,14 @@
         {
           "version": "Beta Launch",
           "date": "Nov 1, 2024",
-          "description": "Closed beta testing with select users"
+          "description": "Closed beta testing with select users",
+          "details": "We launched our closed beta program with a select group of students. This phase helped us identify critical issues and gather valuable feedback before the public release."
         },
         {
           "version": "Alpha Release",
           "date": "Sep 15, 2024",
-          "description": "Early development version released"
+          "description": "Early development version released",
+          "details": "The first alpha version was released to a small group of testers. This early build showcased the core concept of StudiLib and collected initial user feedback."
         }
       ]
     }
