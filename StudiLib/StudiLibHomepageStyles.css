@@ -59,6 +59,10 @@ body {
     color: #9AD284;
 }
 
+/*Main body contents*/
+ul {
+    list-style-type: none;
+}
 
 /*Footer*/
 .main-footer {
