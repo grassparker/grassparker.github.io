@@ -95,7 +95,7 @@
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="blogupdate.html?title=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.summary}</a>`;
+                        li.innerHTML = `<a href="blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link"><b>${item.title}</b> (${item.date}) – ${item.summary}</a>`;
                         ul.appendChild(li);
                     });
                     
