@@ -1,0 +1,26 @@
+{
+  "updates": [
+    {
+      "year": 2025,
+      "items": [
+        {
+          "title": "Under construction",
+          "date": "Jan 22, 2026",
+          "summary": "Welcome to the first launch of the StudiLib website!",
+          "text": "Welcome to the official launching of the StudiLib website. Despite the website is still under construction, you can find most of the infos here and feel free to click around and explore the features of the upcoming update of the software. :)"
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "items": [
+        {
+          "title": "Just an idea",
+          "date": "Nov 11, 2025",
+          "summary": "The first concept of StudiLib was born",
+          "text": "I have a group of friends that study together quite a lot, even online. We always struggled to keep track of our study sessions, breaks, and goals. I thought, why not create an app that makes this easier and more fun? Thus, the idea for StudiLib was born."
+        }
+      ]
+    }
+  ]
+}
