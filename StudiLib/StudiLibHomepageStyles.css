@@ -221,3 +221,8 @@ body {
     justify-content: center;
     gap: 20px;
 }
+
+/* Language Selector */
+.languages {
+    margin-left: 50px;
+}
