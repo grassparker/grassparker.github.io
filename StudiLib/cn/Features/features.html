@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudiLib</title>
 
-    <!-- Pixel title font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
-    <!-- Monospace body font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="StudiLibCN.css">
+    <link rel="stylesheet" href="featurescn.css">
 </head>
 
 <body>
     <header class="main-header">
-        <h1><a href="../cn/StudiLib.html">StudiLib</a></h1>
+        <h1><a href="../StudiLib.html">StudiLib</a></h1>
     </header>
 
     <main class="container">
         <nav>
             <ul class="nav-links">
-                <li><a href="../cn/StudiLib.html">主页</a></li>
-                <li><a href="../cn/Features/features.html">更新</a></li>
-                <li><a href="../cn/Documentation/documentation.html">记录</a></li>
+                <li><a href="../StudiLib.html">首页</a></li>
+                <li><a href="../Features/features.html">更新日志</a></li>
+                <li><a href="../Documentation/documentation.html">文档说明</a></li>
             </ul>
         </nav>
 
@@ -42,51 +40,52 @@
         <section class="main-content">
             <section class="hero">
 
-                <h2>欢迎来到 StudiLib!</h2>
+                <h2>功能介绍</h2>
 
-                <h3>您的终极学习伙伴</h3>
+                <p class="Import-text">您可以在此页面找到有关功能介绍以及最新版本的更新信息。</p>
 
-                <p class="Import-text">一个集成的学习平台，旨在增强学术协作和学生福祉。通过促进目标设定和同步的小组会话，该应用程序营造了一个富有成效的社区环境，缓解了独立学习的孤立感。</p>
-                <h3 class="liTitle">核心功能:</h3>
-                <ul>
-                    <li><b>📅 安排学习计划</b> – 规划小组学习时间，不再错过任何课程。</li>
-                    <li><b>👥 小组动态面板</b> – 实时查看好友的学习内容和当前状态。</li>
-                    <li><b>🎧 加入语音通话</b> – 随时进入小组频道，开启实时陪伴式学习。</li>
-                    <li><b>⏱️ 同步计时器</b> – 与好友同步番茄钟或专注时间。</li>
-                    <li><b>✅ 设定目标</b> – 创建每日或每周学习目标，并追踪进度。</li>
-                    <li><b>🔔 温馨提醒</b> – 在该学习或休息时收到贴心提醒。</li>
-                    <li><b>📊 数据简报</b> – 快速查看小组今日或本周的学习时长统计。</li>
-                    <li><b>💬 轻量聊天 / 笔记</b> – 为小组撰写简短消息或重要备注。</li>
-                </ul>
+                <div id="newest-updates">
+                    </div>
 
                 <h3 class="liTitle">立即开始！</h3>
 
                 <p class="Import-text">加入 StudiLib 社区，让你的学习效率更上一层楼。</p>
             </section>
         </section>
-
-        <aside class="sidebar-right">
-            <h3>博客</h3>
-
-            <ul>
-                <li>建设中</li>
-            </ul>
-        </aside>
     </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 by Candy. All rights reserved.</p>
+        <p>&copy; 2025 Candy. 版权所有。</p>
 
         <ul class="nav-links">
-            <li><a href="PrivacyPolicy.html">隐私政策</a></li>
-            <li><a href="TermsAndServices.html">服务条款</a></li>
+            <li><a href="../PrivacyPolicy.html">隐私政策</a></li>
+            <li><a href="../TermsAndServices.html">服务条款</a></li>
         </ul>
     </footer>
 
     <script>
-        // Load and render updates from JSON
-        fetch('Features/updates.json')
+        // 加载最新更新
+        fetch('Updates.json')
+            .then(response => response.json())
+            .then(data => {
+                const newestYear = data.updates[0];
+                const newestItem = newestYear.items[0];
+                
+                const html = `
+                    <div class="newest-update-card">
+                        <h3>${newestItem.version}</h3>
+                        <p class="date">${newestItem.date}</p>
+                        <p class="description">${newestItem.description}</p>
+                        <a href="updatedetailscn.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">阅读全文 →</a>
+                    </div>
+                `;
+                
+                document.getElementById('newest-updates').innerHTML = html;
+            });
+
+        // 从 JSON 加载并渲染更新列表
+        fetch('Updates.json')
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('updates-container');
@@ -98,7 +97,7 @@
                     const isFirstYear = index === 0;
                     const button = document.createElement('button');
                     button.className = 'year-toggle';
-                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + '年';
                     
                     const ul = document.createElement('ul');
                     ul.className = 'year-content';
@@ -106,7 +105,7 @@
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="Features/updatedetailscn.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
+                        li.innerHTML = `<a href="updatedetailscn.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
                         ul.appendChild(li);
                     });
                     
@@ -124,4 +123,3 @@
     </script>
 </body>
 </html>
-

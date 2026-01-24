@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudiLib</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="">
+    <link rel="stylesheet" href="documentationcn.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <h1><a href="../StudiLib.html">StudiLib</a></h1>
+    </header>
+
+    <main class="container">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../StudiLib.html">首页</a></li>
+                <li><a href="../Features/features.html">更新日志</a></li>
+                <li><a href="../Documentation/documentation.html">文档说明</a></li>
+            </ul>
+        </nav>
+
+        <div class="magazine-layout">
+            <aside class="sidebar-left">
+                <h3>文档说明</h3>
+
+                <div class="collapsible-feature">
+                    <button class="feature-toggle">▼ 地点</button>
+                    <ul class="feature-content">
+                        <li><b>学习小镇</b> – 探索学习小镇功能。</li>
+                        <li><b>宿舍</b> – 专注学习、迎接挑战并打造属于你的小窝。</li>
+                    </ul>
+                </div>
+
+                <div class="collapsible-feature">
+                    <button class="feature-toggle">▶ 功能</button>
+                    <ul class="feature-content" style="display: none;">
+                        <li><b>计时器</b> – 开始你的第一次番茄钟。</li>
+                        <li><b>多人通话</b> – 呼叫你的死党。</li>
+                    </ul>
+                </div>
+            </aside>
+
+        <section class="main-content">
+            <section class="hero">
+
+                <h2>文档说明</h2>
+
+                <h3>你想知道的技术细节都在这里。</h3>
+            
+                <p class="Import-text">这是 StudiLib 的文档说明。你可以在这里找到功能详解和隐藏彩蛋。如果你是技术控，这里还有代码片段、开发阶段记录等内容供你查看。</p>
+
+                <h3 class="liTitle">关于我们：</h3>
+                <p class="Import-text">我们是一个由两人组成的开发团队。我们的目标是创建一个能帮助学生更高效地学习并与同伴协作的平台。</p>
+
+                <div class="person">
+                    <h4><a href="https://grasspixel.click">Candy (She/Her) - 主开发者与设计师</a></h4>
+                    <p class="Import-text">Candy 是 StudiLib 的主开发者和设计师。她负责项目的整体愿景和方向，以及用户界面、体验设计和所有的后端开发。</p>
+                </div>
+
+                <div class="person">
+                    <h4>Ashmita (She/Her) - 艺术与原画师</h4>
+                    <p class="Import-text">Ashmita 是 StudiLib 的艺术与原画师。她负责视觉设计、角色创作、应用程序的整体美学，以及社交媒体帖子的设计。</p>
+                </div>
+
+
+                <h3 class="liTitle">立即开始！</h3>
+
+                <p class="Import-text">加入 StudiLib 社区，让你的学习效率更上一层楼。</p>
+            </section>
+        </section>
+    </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Candy. 版权所有。</p>
+
+        <ul class="nav-links">
+            <li><a href="../PrivacyPolicy.html">隐私政策</a></li>
+            <li><a href="../TermsAndServices.html">服务条款</a></li>
+        </ul>
+    </footer>
+
+    <script>
+       document.querySelectorAll('.feature-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isHidden = content.style.display === 'none';
+                
+                content.style.display = isHidden ? 'block' : 'none';
+                this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
+            });
+        });
+    </script>
+</body>
+</html>
