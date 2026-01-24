@@ -4,6 +4,12 @@
       "year": 2026,
       "items": [
         {
+          "version": "Fully functional website",
+          "date": "Jan 24, 2026",
+          "description": "Functional StudiLib website."
+          "details": "Welcome to the official StudiLib website. The website is now fully functional. The newly added comments section is waiting for an API. We shall post important updates and insights here now. :)"
+        },
+        {
           "version": "Under construction",
           "date": "Jan 22, 2026",
           "description": "Welcome to the first launch of the StudiLib website!",
