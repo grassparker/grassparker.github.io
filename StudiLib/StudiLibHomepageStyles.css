@@ -232,7 +232,7 @@ body {
 .nav-links a {
     margin: 5px 10px;
     white-space: nowrap;
-    color: #e94560;
+    font-color: #e94560;
 }
 
 /*Footer*/
