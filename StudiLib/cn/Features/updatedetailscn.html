@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Details - StudiLib</title>
+    <title>StudiLib | 更新详情</title>
 
-    <!-- Pixel title font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
-    <!-- Monospace body font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
@@ -82,49 +80,50 @@
     <main class="container">
         <nav>
             <ul class="nav-links">
-                <li><a href="../StudiLib.html">Home</a></li>
-                <li><a href="../Features/features.html">Features</a></li>
-                <li><a href="../Documentation/documentation.html">Documentation</a></li>
+                <li><a href="../StudiLib.html">首页</a></li>
+                <li><a href="../Features/features.html">更新日志</a></li>
+                <li><a href="../Documentation/documentation.html">文档说明</a></li>
+                <li><a href="../Blogs/blogs.html">博客</a></li>
             </ul>
         </nav>
 
         <div class="update-details">
-            <h2 id="update-version">Loading...</h2>
+            <h2 id="update-version">加载中...</h2>
             <div class="update-date" id="update-date"></div>
             <div class="update-description" id="update-description"></div>
             <div class="update-details-full" id="update-details-full"></div>
-            <a href="../Features/features.html" class="back-link">← Back to Updates</a>
+            <a href="../Features/features.html" class="back-link">← 返回更新列表</a>
         </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 by Candy. All rights reserved.</p>
+        <p>&copy; 2025 Candy. 版权所有。</p>
 
         <ul class="nav-links">
-            <li><a href="">Privacy Policy</a></li>
-            <li><a href="../TermsAndServices.html">Terms and Services</a></li>
+            <li><a href="">隐私政策</a></li>
+            <li><a href="../TermsAndServices.html">服务条款</a></li>
         </ul>
     </footer>
 
     <script>
-        // Get the version from URL parameters
+        // 从 URL 参数中获取版本号
         const params = new URLSearchParams(window.location.search);
         const version = params.get('version');
 
-        // Load updates from JSON
+        // 加载更新 JSON
         fetch('Updates.json')
             .then(response => response.json())
             .then(data => {
                 let found = false;
 
-                // Search for the matching update
+                // 搜索匹配的更新项
                 for (let yearGroup of data.updates) {
                     for (let item of yearGroup.items) {
                         if (item.version === version) {
                             document.getElementById('update-version').textContent = item.version;
                             document.getElementById('update-date').textContent = item.date;
                             document.getElementById('update-description').textContent = item.description;
-                            document.getElementById('update-details-full').textContent = item.details || 'No additional details available.';
+                            document.getElementById('update-details-full').textContent = item.details || '暂无更多详细信息。';
                             found = true;
                             break;
                         }
@@ -133,13 +132,13 @@
                 }
 
                 if (!found) {
-                    document.getElementById('update-version').textContent = 'Update Not Found';
-                    document.getElementById('update-description').textContent = 'The requested update could not be found.';
+                    document.getElementById('update-version').textContent = '未找到更新';
+                    document.getElementById('update-description').textContent = '无法找到所请求的更新内容。';
                 }
             })
             .catch(error => {
-                document.getElementById('update-version').textContent = 'Error Loading Update';
-                document.getElementById('update-description').textContent = 'There was an error loading the update information.';
+                document.getElementById('update-version').textContent = '加载出错';
+                document.getElementById('update-description').textContent = '加载更新信息时发生错误。';
                 console.error('Error:', error);
             });
     </script>

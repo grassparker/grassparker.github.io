@@ -1,0 +1,15 @@
+{
+  "updates": [
+    {
+      "year": 2026,
+      "items": [
+        {
+            "title": "Building a Home for our Thoughts",
+            "date": "Jan 24, 2026",
+            "summary": "StudiLib gets a major facelift: introducing the new Updates log and the official Dev Blog.",
+            "text": "The code is finally coming together. \n\nUp until now, StudiLib was mostly a collection of local scripts and big dreams. But as any developer knows, if you don't document the journey, the journey eventually consumes you. That’s why I’ve spent the last few days building out the infrastructure for our two newest sections: Updates and Blogs.\n\n### The Updates Section\nTransparency is key. I wanted a way for you to see exactly what we’re working on in real-time. Whether it's a backend fix for the Pomodoro sync or a new pixel asset added to the Study Town, you'll find it in the 'Progress Log.' It’s more than just a changelog; it’s a heartbeat for the project.\n\n### Why a Blog?\nBecause coding isn't hard—but explaining the 'why' behind the code can be. I hate writing and drawing as much as the next dev, but StudiLib is a community project at its core. This blog is where we’ll share the 'Science of Study,' deep dives into our development stages, and maybe a few rants about CSS positioning along the way.\n\nWe’ve refined the UI to keep that cozy, monospace-meets-pixel aesthetic. The blog pages now feature a cleaner, editorial layout that prioritizes readability, complete with a 'Read Time' estimator (for those of us who need to get back to our Pomodoro sessions quickly).\n\nCheck out the Documentation for the technical 'how-to,' or stick around here for the 'behind-the-scenes' stories. Either way, we’re glad you’re part of the library."
+        }
+      ]
+    }
+  ]
+}

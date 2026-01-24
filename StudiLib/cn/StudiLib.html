@@ -28,8 +28,9 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="../cn/StudiLib.html">主页</a></li>
-                <li><a href="../cn/Features/features.html">更新</a></li>
-                <li><a href="../cn/Documentation/documentation.html">记录</a></li>
+                <li><a href="../cn/Features/features.html">更新日志</a></li>
+                <li><a href="../cn/Documentation/documentation.html">文档说明</a></li>
+                <li><a href="../cn/Blogs/blogs.html">博客</a></li>
             </ul>
         </nav>
 
@@ -62,16 +63,19 @@
                 <h3 class="liTitle">立即开始！</h3>
 
                 <p class="Import-text">加入 StudiLib 社区，让你的学习效率更上一层楼。</p>
+
+
+                <h3 class="liTitle">其他语言页面</h3>
+                <ul>
+                    <li><a href="../StudiLib/StudiLib.html">English</a></li>
+                </ul>
             </section>
         </section>
 
         <aside class="sidebar-right">
             <h3>博客</h3>
-
-            <ul>
-                <li>建设中</li>
-            </ul>
-        </aside>
+                <div id="blogs-container"></div>
+            </aside>
     </div>
     </main>
 
@@ -120,6 +124,43 @@
                     div.appendChild(ul);
                     container.appendChild(div);
                 });
+            });
+
+            // Load and render updates from blogs.json
+            fetch('Blogs/blogs.json')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('blogs-container');
+                
+                    data.updates.forEach((yearGroup, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'collapsible-year';
+                    
+                        const isFirstYear = index === 0;
+                        const button = document.createElement('button');
+                        button.className = 'year-toggle';
+                        button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
+                    
+                        const ul = document.createElement('ul');
+                        ul.className = 'year-content';
+                        ul.style.display = isFirstYear ? 'block' : 'none';
+                    
+                        yearGroup.items.forEach(item => {
+                            const li = document.createElement('li');
+                            li.innerHTML = `<a href="Blogs/blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link"><b>${item.title}</b> (${item.date}) – ${item.summary}</a>`;
+                            ul.appendChild(li);
+                        });
+                    
+                        button.addEventListener('click', function() {
+                            const isHidden = ul.style.display === 'none';
+                            ul.style.display = isHidden ? 'block' : 'none';
+                            this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
+                        });
+                    
+                        div.appendChild(button);
+                        div.appendChild(ul);
+                        container.appendChild(div);
+                    });
             });
     </script>
 </body>

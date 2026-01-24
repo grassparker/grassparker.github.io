@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudiLib</title>
+    <title>StudiLib | 博客</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="featurescn.css">
+    <link rel="stylesheet" href="blogscn.css">
 </head>
 
 <body>
@@ -34,23 +34,31 @@
 
         <div class="magazine-layout">
             <aside class="sidebar-left">
-                <h3>最近更新</h3>
-                <div id="updates-container"></div>
+                <h3>文章归档</h3>
+                <div id="blogs-container"></div>
             </aside>
 
         <section class="main-content">
             <section class="hero">
 
-                <h2>功能介绍</h2>
+                <h2>StudiLib 随笔</h2>
 
-                <p class="Import-text">您可以在此页面找到有关功能介绍以及最新版本的更新信息。</p>
+                <h3>记录、思考与学习的科学</h3>
+            
+                <p class="Import-text">欢迎来到我们的数字角落。在这里，我们深入探讨学习的艺术。无论你是在寻找最适合专注的番茄钟歌单，还是想深度了解效率心理学，亦或是只想看看 StudiLib 团队背后的心路历程，这里都能满足你。</p>
 
-                <div id="newest-updates">
-                    </div>
+                <h3 class="liTitle">我们的内容：</h3>
+                <ul>
+                    <li><b>🧠 高效科学</b> – 探究我们为何拖延，以及如何“欺骗”大脑进入专注状态。</li>
+                    <li><b>💻 开发日志</b> – 幕后花絮：StudiLib 是如何从零开始设计与构建的。</li>
+                    <li><b>🌱 身心健康</b> – 在埋头苦读与心理健康及休息之间寻找平衡。</li>
+                    <li><b>🎒 学习聚焦</b> – 探索小组协作与共同进步的最佳实践。</li>
+                    <li><b>🎨 创意空间</b> – 艺术、审美，以及我们像素世界背后的设计灵感。</li>
+                </ul>
 
-                <h3 class="liTitle">立即开始！</h3>
+                <h3 class="liTitle">保持关注</h3>
 
-                <p class="Import-text">加入 StudiLib 社区，让你的学习效率更上一层楼。</p>
+                <p class="Import-text">我们每月都会发布新文章。倒上一杯咖啡，找个舒服的位置，让我们共同成长。</p>
             </section>
         </section>
     </div>
@@ -60,36 +68,17 @@
         <p>&copy; 2025 Candy. 版权所有。</p>
 
         <ul class="nav-links">
-            <li><a href="../PrivacyPolicy.html">隐私政策</a></li>
-            <li><a href="../TermsAndServices.html">服务条款</a></li>
+            <li><a href="PrivacyPolicy.html">隐私政策</a></li>
+            <li><a href="TermsAndServices.html">服务条款</a></li>
         </ul>
     </footer>
 
     <script>
-        // 加载最新更新
-        fetch('Updates.json')
+        // 从 JSON 加载并渲染博客列表
+        fetch('blogs.json')
             .then(response => response.json())
             .then(data => {
-                const newestYear = data.updates[0];
-                const newestItem = newestYear.items[0];
-                
-                const html = `
-                    <div class="newest-update-card">
-                        <h3>${newestItem.version}</h3>
-                        <p class="date">${newestItem.date}</p>
-                        <p class="description">${newestItem.description}</p>
-                        <a href="updatedetailscn.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">阅读全文 →</a>
-                    </div>
-                `;
-                
-                document.getElementById('newest-updates').innerHTML = html;
-            });
-
-        // 从 JSON 加载并渲染更新列表
-        fetch('Updates.json')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('updates-container');
+                const container = document.getElementById('blogs-container');
                 
                 data.updates.forEach((yearGroup, index) => {
                     const div = document.createElement('div');
@@ -106,7 +95,7 @@
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="updatedetailscn.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
+                        li.innerHTML = `<a href="blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link"><b>${item.title}</b> (${item.date}) – ${item.summary}</a>`;
                         ul.appendChild(li);
                     });
                     
