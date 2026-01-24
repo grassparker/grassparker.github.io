@@ -85,22 +85,38 @@ body {
 }
 
 /* Responsive: Stack on smaller screens */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .magazine-layout {
-        grid-template-columns: 1fr 1fr;
+        display: flex; /* Switch from grid to flex for easier stacking */
+        flex-direction: column;
     }
-    .sidebar-right {
-        grid-column: 1 / -1;
+    
+    .sidebar-left {
+        order: 2; /* Put the sidebar below the main content on mobile */
+    }
+    
+    .main-content {
+        order: 1;
     }
 }
 
 @media (max-width: 768px) {
-    .magazine-layout {
-        grid-template-columns: 1fr;
-        padding: 15px;
-        gap: 20px;
+    .hero {
+        padding: 20px 10px; /* Reduced padding for mobile */
+    }
+    .hero h1 {
+        font-size: 32px; /* Shrink massive titles so they don't break lines awkwardly */
+    }
+    .liTitle {
+        font-size: 28px;
+    }
+    .languages {
+        margin-left: 0; /* Remove that large left margin on mobile */
+        margin-top: 10px;
+        text-align: center;
     }
 }
+
 
 /*Header*/
 .main-header {
@@ -158,15 +174,21 @@ body {
 .nav-links {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     background: #e8dcc8;
-    padding: 10px 0;
+    padding: 10px 15px; 
+    gap: 10px;
+}
+
+.nav-links li {
+    list-style: none; 
 }
 
 .nav-links a {
-    color: #0f3460;
-    margin: 0 15px;
-    font-weight: bold;
-    font-size: 18px;
+    margin: 5px 10px;
+    white-space: nowrap;
+    font-color: #e94560;
 }
 
 /*Footer*/
