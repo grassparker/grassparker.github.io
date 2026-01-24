@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudiLib</title>
+    <title>StudiLib | Updates & Features</title>
 
-    <!-- Pixel title font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
-    <!-- Monospace body font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="Features.css">
+    <link rel="stylesheet" href="updates.css">
 </head>
 
 <body>
@@ -28,33 +26,31 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="../StudiLib.html">Home</a></li>
-                <li><a href="Features.html">Updates</a></li>
+                <li><a href="updates.html">Updates</a></li>
                 <li><a href="../documentation/Documentation.html">Documentation</a></li>
+                <li><a href="../Blogs/Blogs.html">Blogs</a></li>
             </ul>
         </nav>
 
         <div class="magazine-layout">
             <aside class="sidebar-left">
-                <h3>Recent Updates</h3>
+                <h3>Changelog Archive</h3>
                 <div id="updates-container"></div>
             </aside>
 
         <section class="main-content">
             <section class="hero">
 
-                <h2>Features</h2>
+                <h2>The Progress Log</h2>
 
-                <p class="Import-text">You will find information about features as well as updates on this page.</p>
+                <p class="Import-text">We’re constantly building and refining. Below, you’ll find our latest feature rollouts, bug fixes, and a sneak peek at what’s currently in the oven. Stay updated as we evolve your study experience.</p>
 
                 <div id="newest-updates">
-                    <!-- Updates will be loaded here dynamically -->
+                    </div>
 
+                <h3 class="liTitle">Don't Study Alone!</h3>
 
-                </div>
-
-                <h3 class="liTitle">Get Started Today!</h3>
-
-                <p class="Import-text">Join the StudiLib community and take your studies to the next level.</p>
+                <p class="Import-text">Ready to experience these features in action? Join the StudiLib community today and transform your academic routine into a collaborative journey.</p>
             </section>
         </section>
     </div>
@@ -79,10 +75,11 @@
                 
                 const html = `
                     <div class="newest-update-card">
+                        <span class="badge">LATEST UPDATE</span>
                         <h3>${newestItem.version}</h3>
                         <p class="date">${newestItem.date}</p>
                         <p class="description">${newestItem.description}</p>
-                        <a href="UpdateDetails.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">Read More →</a>
+                        <a href="UpdateDetails.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">View Full Patch Notes →</a>
                     </div>
                 `;
                 
@@ -102,7 +99,7 @@
                     const isFirstYear = index === 0;
                     const button = document.createElement('button');
                     button.className = 'year-toggle';
-                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + ' Releases';
                     
                     const ul = document.createElement('ul');
                     ul.className = 'year-content';
@@ -110,7 +107,7 @@
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="UpdateDetails.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
+                        li.innerHTML = `<a href="UpdateDetails.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> – ${item.description}</a>`;
                         ul.appendChild(li);
                     });
                     
