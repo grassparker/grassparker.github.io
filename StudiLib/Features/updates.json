@@ -4,16 +4,16 @@
       "year": 2026,
       "items": [
         {
-          "version": "Under construction",
-          "date": "Jan 22, 2026",
-          "description": "Welcome to the first launch of the StudiLib website!",
-          "details": "Welcome to the official launching of the StudiLib website. Despite the website is still under construction, you can find most of the infos here and feel free to click around and explore the features of the upcoming update of the software. :)"
-        },
-        {
           "version": "Website in Chinese and English",
           "date": "Jan 24, 2026",
           "description": "Website in both Chinese and English",
           "details": "The website now is in both English and Chinese. I am currently adjusting the CSS so the website fits on all screens. Now the official updates are on the websites and you can check them out here."
+        },
+        {
+          "version": "Under construction",
+          "date": "Jan 22, 2026",
+          "description": "Welcome to the first launch of the StudiLib website!",
+          "details": "Welcome to the official launching of the StudiLib website. Despite the website is still under construction, you can find most of the infos here and feel free to click around and explore the features of the upcoming update of the software. :)"
         }
       ]
     },
