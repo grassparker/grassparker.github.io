@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="updates.css">
+    <link rel="stylesheet" href="Blogs.css">
     <style>
         .update-details {
             background: rgba(232, 220, 200, 0.05);
@@ -83,8 +83,9 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="../StudiLib.html">Home</a></li>
-                <li><a href="updates.html">Updates</a></li>
+                <li><a href="../Features/updates.html">Updates</a></li>
                 <li><a href="../documentation/documentation.html">Documentation</a></li>
+                <li><a href="../Blogs/blogs.html">Blogs</a></li>
             </ul>
         </nav>
 
@@ -93,7 +94,7 @@
             <div class="update-date" id="update-date"></div>
             <div class="update-description" id="update-description"></div>
             <div class="update-details-full" id="update-details-full"></div>
-            <a href="updates.html" class="back-link">← Back to Updates</a>
+            <a href="../Blogs/blogs.html" class="back-link">← Back to Blogs</a>
         </div>
     </main>
 
@@ -109,10 +110,10 @@
     <script>
         // Get the version from URL parameters
         const params = new URLSearchParams(window.location.search);
-        const version = params.get('version');
+        const version = params.get('title');
 
         // Load updates from JSON
-        fetch('updates.json')
+        fetch('blogs.json')
             .then(response => response.json())
             .then(data => {
                 let found = false;
@@ -133,13 +134,13 @@
                 }
 
                 if (!found) {
-                    document.getElementById('update-version').textContent = 'Update Not Found';
-                    document.getElementById('update-description').textContent = 'The requested update could not be found.';
+                    document.getElementById('update-version').textContent = 'Blog Not Found';
+                    document.getElementById('update-description').textContent = 'The requested blog could not be found.';
                 }
             })
             .catch(error => {
-                document.getElementById('update-version').textContent = 'Error Loading Update';
-                document.getElementById('update-description').textContent = 'There was an error loading the update information.';
+                document.getElementById('update-version').textContent = 'Error Loading Blog';
+                document.getElementById('update-description').textContent = 'There was an error loading the blog information.';
                 console.error('Error:', error);
             });
     </script>

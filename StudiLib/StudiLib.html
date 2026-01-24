@@ -67,14 +67,11 @@
             </section>
         </section>
 
-        <aside class="sidebar-right">
+            <aside class="sidebar-right">
             <h3>Blogs</h3>
-
-            <ul>
-                <li>Under construction</li>
-            </ul>
-        </aside>
-    </div>
+                <div id="blogs-container"></div>
+            </aside>
+        </div>
     </main>
 
     <footer class="main-footer">
@@ -87,7 +84,7 @@
     </footer>
 
     <script>
-        // Load and render updates from JSON
+        // Load and render updates from updates.json
         fetch('Features/updates.json')
             .then(response => response.json())
             .then(data => {
@@ -109,6 +106,43 @@
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
                         li.innerHTML = `<a href="Features/UpdateDetails.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
+                        ul.appendChild(li);
+                    });
+                    
+                    button.addEventListener('click', function() {
+                        const isHidden = ul.style.display === 'none';
+                        ul.style.display = isHidden ? 'block' : 'none';
+                        this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
+                    });
+                    
+                    div.appendChild(button);
+                    div.appendChild(ul);
+                    container.appendChild(div);
+                });
+            });
+
+            // Load and render updates from blogs.json
+        fetch('Blogs/blogs.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('blogs-container');
+                
+                data.updates.forEach((yearGroup, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'collapsible-year';
+                    
+                    const isFirstYear = index === 0;
+                    const button = document.createElement('button');
+                    button.className = 'year-toggle';
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
+                    
+                    const ul = document.createElement('ul');
+                    ul.className = 'year-content';
+                    ul.style.display = isFirstYear ? 'block' : 'none';
+                    
+                    yearGroup.items.forEach(item => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<a href="Blogs/blogupdate.html?title=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
                         ul.appendChild(li);
                     });
                     
