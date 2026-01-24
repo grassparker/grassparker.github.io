@@ -248,6 +248,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
+    color: #e94560;
 }
 
 /* Language Selector */
