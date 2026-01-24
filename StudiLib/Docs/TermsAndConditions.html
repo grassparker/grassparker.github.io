@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudiLib | Terms and Services</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="docs.css"> 
+    
+    <style>
+        .legal-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(232, 220, 200, 0.05);
+            border: 2px solid #e94560;
+            border-radius: 8px;
+            color: #e8dcc8;
+        }
+
+        .legal-section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(233, 69, 96, 0.2);
+            padding-bottom: 20px;
+        }
+
+        .legal-section h2 {
+            font-family: "Pixelify Sans", sans-serif;
+            color: #e94560;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .legal-section h3 {
+            font-family: "Pixelify Sans", sans-serif;
+            color: #e94560;
+            font-size: 20px;
+            margin-top: 25px;
+        }
+
+        .legal-section p, .legal-section li {
+            font-family: "Cutive Mono", monospace;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid #e94560;
+            color: #e94560;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .lang-btn:hover {
+            background: #e94560;
+            color: #e8dcc8;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <h1><a href="../StudiLib.html">StudiLib</a></h1>
+    </header>
+
+    <main class="container">
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="switchLang('en')">English</button>
+            <button class="lang-btn" onclick="switchLang('cn')">中文</button>
+        </div>
+
+        <div id="legal-en" class="legal-container">
+            <div class="legal-section">
+                <h2>Terms and Services</h2>
+                <p>Last Updated: January 24, 2026</p>
+                <p>Welcome to StudiLib. By using our platform, you agree to the following terms. Please read them carefully.</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>1. Use of Service</h3>
+                <p>StudiLib is a collaborative study platform. You agree to use this service only for lawful purposes and in a way that does not infringe the rights of others or restrict their use of the platform.</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>2. User Content</h3>
+                <p>You retain ownership of any notes or messages you post. However, by sharing them in public or group spaces, you grant StudiLib the right to host and display that content for your study group.</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>3. Code of Conduct</h3>
+                <p>No harassment, spamming, or sharing of copyrighted academic materials without permission. We aim to keep this a cozy and safe space for everyone to learn.</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>4. Limitation of Liability</h3>
+                <p>StudiLib is provided "as is." While we help you study, we are not responsible for any missed deadlines or technical glitches during your sessions.</p>
+            </div>
+        </div>
+
+        <div id="legal-cn" class="legal-container hidden">
+            <div class="legal-section">
+                <h2>服务条款</h2>
+                <p>最后更新日期：2026年1月24日</p>
+                <p>欢迎使用 StudiLib。使用我们的平台即表示您同意以下条款。请仔细阅读。</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>1. 服务使用</h3>
+                <p>StudiLib 是一个协作学习平台。您同意仅出于合法目的使用本服务，并且不侵犯他人权利或限制他人使用本平台。</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>2. 用户内容</h3>
+                <p>您保留对自己发布的笔记或消息的所有权。但是，通过在公共或小组空间分享这些内容，即表示您授予 StudiLib 为您的学习小组托管和展示该内容的权利。</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>3. 行为准则</h3>
+                <p>禁止骚扰、发布垃圾信息或未经许可分享受版权保护的学术材料。我们的目标是为每个人提供一个温馨、安全的学习空间。</p>
+            </div>
+
+            <div class="legal-section">
+                <h3>4. 免责声明</h3>
+                <p>StudiLib 按“原样”提供。虽然我们协助您学习，但对于学习过程中的任何错过截止日期或技术故障，我们不承担责任。</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="../StudiLib.html" class="back-link">← Return Home / 返回首页</a>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 by Candy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function switchLang(lang) {
+            if (lang === 'en') {
+                document.getElementById('legal-en').classList.remove('hidden');
+                document.getElementById('legal-cn').classList.add('hidden');
+            } else {
+                document.getElementById('legal-en').classList.add('hidden');
+                document.getElementById('legal-cn').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

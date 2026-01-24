@@ -4,10 +4,10 @@
       "year": 2026,
       "items": [
         {
-            "title": "Building a Home for our Thoughts",
-            "date": "Jan 24, 2026",
-            "summary": "StudiLib gets a major facelift: introducing the new Updates log and the official Dev Blog.",
-            "text": "The code is finally coming together. \n\nUp until now, StudiLib was mostly a collection of local scripts and big dreams. But as any developer knows, if you don't document the journey, the journey eventually consumes you. That’s why I’ve spent the last few days building out the infrastructure for our two newest sections: Updates and Blogs.\n\n### The Updates Section\nTransparency is key. I wanted a way for you to see exactly what we’re working on in real-time. Whether it's a backend fix for the Pomodoro sync or a new pixel asset added to the Study Town, you'll find it in the 'Progress Log.' It’s more than just a changelog; it’s a heartbeat for the project.\n\n### Why a Blog?\nBecause coding isn't hard—but explaining the 'why' behind the code can be. I hate writing and drawing as much as the next dev, but StudiLib is a community project at its core. This blog is where we’ll share the 'Science of Study,' deep dives into our development stages, and maybe a few rants about CSS positioning along the way.\n\nWe’ve refined the UI to keep that cozy, monospace-meets-pixel aesthetic. The blog pages now feature a cleaner, editorial layout that prioritizes readability, complete with a 'Read Time' estimator (for those of us who need to get back to our Pomodoro sessions quickly).\n\nCheck out the Documentation for the technical 'how-to,' or stick around here for the 'behind-the-scenes' stories. Either way, we’re glad you’re part of the library."
+          "title": "为我们的思想建立一个家",
+          "date": "2026年1月24日",
+          "summary": "StudiLib 迎来重大改版：全新的更新日志和官方开发博客正式上线。",
+          "text": "代码终于成型了。\n\n直到现在，StudiLib 在很大程度上还只是本地脚本和宏大梦想的集合。但任何开发者都知道，如果你不记录这段旅程，旅程最终会让你迷失。这就是为什么我过去几天一直在搭建这两个全新板块的基础设施：更新日志（Updates）和博客（Blogs）。\n\n### 更新日志板块\n透明度是关键。我希望有一种方式能让你实时看到我们正在努力的方向。无论是番茄钟同步的后端修复，还是学习小镇中新加入的像素资源，你都能在“进度日志”中找到。它不仅仅是一个更新列表；它是这个项目的脉搏。\n\n### 为什么要办博客？\n因为写代码并不难，但解释代码背后的“初衷”却很难。和大多数开发者一样，我也讨厌写作和画画，但 StudiLib 的核心是一个社区项目。在这个博客里，我们将分享“学习的科学”、开发阶段的深度探索，或许还会顺便吐槽一下 CSS 定位带来的烦恼。\n\n我们优化了 UI，保留了那种温馨的“等宽字体遇上像素”的美学风格。博客页面现在拥有更整洁、更具社论感的布局，优先考虑阅读体验，并配备了“阅读时间估算”（专门为我们这些需要快速回到番茄钟状态的人设计）。\n\n你可以去“文档说明”查看技术上的使用指南，或者留在这里听听“幕后故事”。无论哪种方式，我们都很高兴你能成为这个图书馆的一员。"
         }
       ]
     }
