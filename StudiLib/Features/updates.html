@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,126 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Cutive+Mono&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../StudiLibHomepageStyles.css">
 
-    <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="updates.css">
+    <style>
+        .container {
+            flex: 1;
+        }
+
+        .magazine-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e94560;
+            height: fit-content;
+        }
+
+        .sidebar-left h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e94560;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .sidebar-left ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar-left li {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: rgba(233, 69, 96, 0.05);
+            border-left: 3px solid #e94560;
+            font-size: 14px;
+        }
+
+        /* Newest Update Card */
+        .newest-update-card {
+            background: rgba(233, 69, 96, 0.1);
+            border: 2px solid #e94560;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .badge {
+            background: #e94560;
+            color: #e8dcc8;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: "Pixelify Sans", sans-serif;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .newest-update-card h3 {
+            color: #e94560;
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .newest-update-card .date {
+            color: #a0a0a0;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .newest-update-card .description {
+            color: #e8dcc8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newest-update-card .read-more {
+            color: #e94560;
+            text-decoration: underline;
+            font-weight: bold;
+            font-family: "Pixelify Sans", sans-serif;
+            transition: 0.3s;
+        }
+
+        .newest-update-card .read-more:hover {
+            color: #e8dcc8;
+        }
+
+        /* Responsive Mobile Fixes */
+        @media (max-width: 768px) {
+            .magazine-layout {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .hero {
+                padding: 20px 10px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -38,27 +151,22 @@
                 <div id="updates-container"></div>
             </aside>
 
-        <section class="main-content">
-            <section class="hero">
+            <section class="main-content">
+                <section class="hero">
+                    <h2>The Progress Log</h2>
+                    <p class="Import-text">We’re constantly building and refining. Below, you’ll find our latest feature rollouts, bug fixes, and a sneak peek at what’s currently in the oven. Stay updated as we evolve your study experience.</p>
 
-                <h2>The Progress Log</h2>
+                    <div id="newest-updates"></div>
 
-                <p class="Import-text">We’re constantly building and refining. Below, you’ll find our latest feature rollouts, bug fixes, and a sneak peek at what’s currently in the oven. Stay updated as we evolve your study experience.</p>
-
-                <div id="newest-updates">
-                    </div>
-
-                <h3 class="liTitle">Don't Study Alone!</h3>
-
-                <p class="Import-text">Ready to experience these features in action? Join the StudiLib community today and transform your academic routine into a collaborative journey.</p>
+                    <h3 class="liTitle">Don't Study Alone!</h3>
+                    <p class="Import-text">Ready to experience these features in action? Join the StudiLib community today and transform your academic routine into a collaborative journey.</p>
+                </section>
             </section>
-        </section>
-    </div>
+        </div>
     </main>
 
     <footer class="main-footer">
         <p>&copy; 2025 by Candy. All rights reserved.</p>
-
         <ul class="nav-links">
             <li><a href="../Docs/PrivacyPolicy.html">Privacy Policy</a></li>
             <li><a href="../Docs/TermsAndConditions.html">Terms and Services</a></li>
@@ -66,14 +174,13 @@
     </footer>
 
     <script>
-        // Load newest update
+        // Combined Fetch Logic
         fetch('updates.json')
             .then(response => response.json())
             .then(data => {
-                const newestYear = data.updates[0];
-                const newestItem = newestYear.items[0];
-                
-                const html = `
+                // 1. Render the Hero (Newest) Update Card
+                const newestItem = data.updates[0].items[0];
+                const heroHtml = `
                     <div class="newest-update-card">
                         <span class="badge">LATEST UPDATE</span>
                         <h3>${newestItem.version}</h3>
@@ -82,16 +189,10 @@
                         <a href="UpdateDetails.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">View Full Patch Notes →</a>
                     </div>
                 `;
-                
-                document.getElementById('newest-updates').innerHTML = html;
-            });
+                document.getElementById('newest-updates').innerHTML = heroHtml;
 
-        // Load and render updates from JSON
-        fetch('updates.json')
-            .then(response => response.json())
-            .then(data => {
+                // 2. Render the Archive Sidebar
                 const container = document.getElementById('updates-container');
-                
                 data.updates.forEach((yearGroup, index) => {
                     const div = document.createElement('div');
                     div.className = 'collapsible-year';
@@ -99,6 +200,8 @@
                     const isFirstYear = index === 0;
                     const button = document.createElement('button');
                     button.className = 'year-toggle';
+                    button.style.width = "100%";
+                    button.style.textAlign = "left";
                     button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + ' Releases';
                     
                     const ul = document.createElement('ul');
@@ -117,11 +220,12 @@
                         this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
                     });
                     
-                    div.appendChild(button);
-                    div.appendChild(ul);
+                    div.append(button, ul);
                     container.appendChild(div);
                 });
-            });
+            })
+            .catch(error => console.error('Error fetching updates:', error));
     </script>
 </body>
+
 </html>
