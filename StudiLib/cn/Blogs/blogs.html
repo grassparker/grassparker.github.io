@@ -1,20 +1,77 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudiLib | 博客</title>
+    <title>StudiLib | 官方博客</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Cutive+Mono&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../StudiLibCN.css">
+    <style>
+        .container {
+            flex: 1;
+        }
 
-    <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="blogscn.css">
+        .magazine-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e94560;
+        }
+
+        .sidebar-left h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e94560;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .sidebar-left ul {
+            font-size: 16px;
+            list-style-type: none;
+        }
+
+        .sidebar-left li {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 3px solid #e94560;
+            font-size: 14px;
+        }
+
+        /* 移动端响应式修复 */
+        @media (max-width: 768px) {
+            .magazine-layout {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .hero {
+                padding: 20px 10px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,50 +83,50 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="../StudiLib.html">首页</a></li>
-                <li><a href="../Features/features.html">更新日志</a></li>
+                <li><a href="../Features/features.html">更新动态</a></li>
                 <li><a href="../Documentation/documentation.html">文档说明</a></li>
-                <li><a href="../Blogs/blogs.html">博客</a></li>
+                <li><a href="../Blogs/blogs.html">官方博客</a></li>
             </ul>
         </nav>
 
         <div class="magazine-layout">
             <aside class="sidebar-left">
-                <h3>文章归档</h3>
+                <h3>文章存档</h3>
                 <div id="blogs-container"></div>
             </aside>
 
-        <section class="main-content">
-            <section class="hero">
+            <section class="main-content">
+                <section class="hero">
+                    <h2>StudiLib 期刊</h2>
+                    <h3>随笔、感悟与学习科学</h3>
+                
+                    <p class="Import-text">
+                        欢迎来到我们的数字角落。在这里，我们深入探讨学习的艺术。 
+                        无论你是在寻找最佳的番茄钟歌单，还是想深度了解效率心理学， 
+                        亦或是只想看看 StudiLib 团队的近况，这里都是你的不二之选。
+                    </p>
 
-                <h2>StudiLib 随笔</h2>
+                    <h3 class="liTitle">我们的内容方向：</h3>
+                    <ul>
+                        <li><b>🧠 效率科学</b> – 为什么我们会拖延，以及如何“欺骗”大脑进入专注状态。</li>
+                        <li><b>💻 开发日志</b> – 幕后视角，带你了解 StudiLib 是如何构建与设计的。</li>
+                        <li><b>🌱 身心健康</b> – 在埋头苦学的同时，保持心理健康与充足的休息。</li>
+                        <li><b>🎒 学习亮点</b> – 探索小组协作与共同学习的最佳方式。</li>
+                        <li><b>🎨 创意角落</b> – 艺术、美学，以及支撑我们像素世界的背后灵感。</li>
+                    </ul>
 
-                <h3>记录、思考与学习的科学</h3>
-            
-                <p class="Import-text">欢迎来到我们的数字角落。在这里，我们深入探讨学习的艺术。无论你是在寻找最适合专注的番茄钟歌单，还是想深度了解效率心理学，亦或是只想看看 StudiLib 团队背后的心路历程，这里都能满足你。</p>
-
-                <h3 class="liTitle">我们的内容：</h3>
-                <ul>
-                    <li><b>🧠 高效科学</b> – 探究我们为何拖延，以及如何“欺骗”大脑进入专注状态。</li>
-                    <li><b>💻 开发日志</b> – 幕后花絮：StudiLib 是如何从零开始设计与构建的。</li>
-                    <li><b>🌱 身心健康</b> – 在埋头苦读与心理健康及休息之间寻找平衡。</li>
-                    <li><b>🎒 学习聚焦</b> – 探索小组协作与共同进步的最佳实践。</li>
-                    <li><b>🎨 创意空间</b> – 艺术、审美，以及我们像素世界背后的设计灵感。</li>
-                </ul>
-
-                <h3 class="liTitle">保持关注</h3>
-
-                <p class="Import-text">我们每月都会发布新文章。倒上一杯咖啡，找个舒服的位置，让我们共同成长。</p>
+                    <h3 class="liTitle">保持联系</h3>
+                    <p class="Import-text">我们每月都会发布新文章。端上一杯咖啡，找个舒服的位置，让我们一起成长。</p>
+                </section>
             </section>
-        </section>
-    </div>
+        </div>
     </main>
 
     <footer class="main-footer">
         <p>&copy; 2025 Candy. 版权所有。</p>
-
         <ul class="nav-links">
-            <li><a href="../StudiLib/Docs/PrivacyPolicy.html">隐私政策</a></li>
-            <li><a href="../StudiLib/Docs/TermsAndConditions.html">服务条款</a></li>
+            <li><a href="../Docs/PrivacyPolicy.html">隐私政策</a></li>
+            <li><a href="../Docs/TermsAndConditions.html">服务条款</a></li>
         </ul>
     </footer>
 
@@ -87,15 +144,28 @@
                     const isFirstYear = index === 0;
                     const button = document.createElement('button');
                     button.className = 'year-toggle';
-                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + '年';
+                    button.style.width = "100%";
+                    button.style.textAlign = "left";
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + "年度";
                     
                     const ul = document.createElement('ul');
                     ul.className = 'year-content';
                     ul.style.display = isFirstYear ? 'block' : 'none';
+                    ul.style.padding = "0";
+                    ul.style.listStyle = "none";
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link"><b>${item.title}</b> (${item.date}) – ${item.summary}</a>`;
+                        li.style.padding = "10px";
+                        li.style.borderLeft = "3px solid #e94560";
+                        li.style.background = "rgba(233,69,96,0.05)";
+                        li.style.marginBottom = "5px";
+                        
+                        li.innerHTML = `
+                            <a href="blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link">
+                                <b>${item.title}</b><br>
+                                <small>${item.date}</small>
+                            </a>`;
                         ul.appendChild(li);
                     });
                     
@@ -109,7 +179,8 @@
                     div.appendChild(ul);
                     container.appendChild(div);
                 });
-            });
+            })
+            .catch(err => console.error("加载博客时出错:", err));
     </script>
 </body>
 </html>

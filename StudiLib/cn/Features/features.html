@@ -1,20 +1,133 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudiLib</title>
+    <title>StudiLib | 更新与特性</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Cutive+Mono&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../StudiLibCN.css">
 
-    <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="featurescn.css">
+    <style>
+        .container {
+            flex: 1;
+        }
+
+        .magazine-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e94560;
+            height: fit-content;
+        }
+
+        .sidebar-left h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e94560;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .sidebar-left ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar-left li {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: rgba(233, 69, 96, 0.05);
+            border-left: 3px solid #e94560;
+            font-size: 14px;
+        }
+
+        /* 最新更新卡片 */
+        .newest-update-card {
+            background: rgba(233, 69, 96, 0.1);
+            border: 2px solid #e94560;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .badge {
+            background: #e94560;
+            color: #e8dcc8;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: "Pixelify Sans", sans-serif;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .newest-update-card h3 {
+            color: #e94560;
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .newest-update-card .date {
+            color: #a0a0a0;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .newest-update-card .description {
+            color: #e8dcc8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newest-update-card .read-more {
+            color: #e94560;
+            text-decoration: underline;
+            font-weight: bold;
+            font-family: "Pixelify Sans", sans-serif;
+            transition: 0.3s;
+        }
+
+        .newest-update-card .read-more:hover {
+            color: #e8dcc8;
+        }
+
+        /* 移动端响应式修复 */
+        @media (max-width: 768px) {
+            .magazine-layout {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .hero {
+                padding: 20px 10px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,71 +139,60 @@
         <nav>
             <ul class="nav-links">
                 <li><a href="../StudiLib.html">首页</a></li>
-                <li><a href="../Features/features.html">更新日志</a></li>
+                <li><a href="../Features/features.html">更新动态</a></li>
                 <li><a href="../Documentation/documentation.html">文档说明</a></li>
-                <li><a href="../Blogs/blogs.html">博客</a></li>
+                <li><a href="../Blogs/blogs.html">官方博客</a></li>
             </ul>
         </nav>
 
         <div class="magazine-layout">
             <aside class="sidebar-left">
-                <h3>最近更新</h3>
+                <h3>更新日志归档</h3>
                 <div id="updates-container"></div>
             </aside>
 
-        <section class="main-content">
-            <section class="hero">
+            <section class="main-content">
+                <section class="hero">
+                    <h2>开发进度日志</h2>
+                    <p class="Import-text">我们正在不断构建与优化。在下方，你可以找到最新的功能上线记录、漏洞修复，以及我们正在开发中的功能预览。紧跟我们的步伐，见证学习体验的进化。</p>
 
-                <h2>功能介绍</h2>
+                    <div id="newest-updates"></div>
 
-                <p class="Import-text">您可以在此页面找到有关功能介绍以及最新版本的更新信息。</p>
-
-                <div id="newest-updates">
-                    </div>
-
-                <h3 class="liTitle">立即开始！</h3>
-
-                <p class="Import-text">加入 StudiLib 社区，让你的学习效率更上一层楼。</p>
+                    <h3 class="liTitle">拒绝孤军奋战！</h3>
+                    <p class="Import-text">准备好亲身体验这些功能了吗？立即加入 StudiLib 社区，将你的学术日常转变为一场协作之旅。</p>
+                </section>
             </section>
-        </section>
-    </div>
+        </div>
     </main>
 
     <footer class="main-footer">
         <p>&copy; 2025 Candy. 版权所有。</p>
-
         <ul class="nav-links">
-            <li><a href="">隐私政策</a></li>
-            <li><a href="">服务条款</a></li>
+            <li><a href="../Docs/PrivacyPolicy.html">隐私政策</a></li>
+            <li><a href="../Docs/TermsAndConditions.html">服务条款</a></li>
         </ul>
     </footer>
 
     <script>
-        // 加载最新更新
-        fetch('Updates.json')
+        // 综合获取逻辑
+        fetch('updates.json')
             .then(response => response.json())
             .then(data => {
-                const newestYear = data.updates[0];
-                const newestItem = newestYear.items[0];
-                
-                const html = `
+                // 1. 渲染英雄区（最新）更新卡片
+                const newestItem = data.updates[0].items[0];
+                const heroHtml = `
                     <div class="newest-update-card">
+                        <span class="badge">最新更新</span>
                         <h3>${newestItem.version}</h3>
                         <p class="date">${newestItem.date}</p>
                         <p class="description">${newestItem.description}</p>
-                        <a href="updatedetailscn.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">阅读全文 →</a>
+                        <a href="UpdateDetails.html?version=${encodeURIComponent(newestItem.version)}" class="read-more">查看完整更新说明 →</a>
                     </div>
                 `;
-                
-                document.getElementById('newest-updates').innerHTML = html;
-            });
+                document.getElementById('newest-updates').innerHTML = heroHtml;
 
-        // 从 JSON 加载并渲染更新列表
-        fetch('Updates.json')
-            .then(response => response.json())
-            .then(data => {
+                // 2. 渲染归档侧边栏
                 const container = document.getElementById('updates-container');
-                
                 data.updates.forEach((yearGroup, index) => {
                     const div = document.createElement('div');
                     div.className = 'collapsible-year';
@@ -98,7 +200,9 @@
                     const isFirstYear = index === 0;
                     const button = document.createElement('button');
                     button.className = 'year-toggle';
-                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + '年';
+                    button.style.width = "100%";
+                    button.style.textAlign = "left";
+                    button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year + ' 年度发布';
                     
                     const ul = document.createElement('ul');
                     ul.className = 'year-content';
@@ -106,7 +210,7 @@
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="updatedetailscn.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> (${item.date}) – ${item.description}</a>`;
+                        li.innerHTML = `<a href="updatedetailscn.html?version=${encodeURIComponent(item.version)}" class="update-link"><b>${item.version}</b> – ${item.description}</a>`;
                         ul.appendChild(li);
                     });
                     
@@ -116,11 +220,12 @@
                         this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
                     });
                     
-                    div.appendChild(button);
-                    div.appendChild(ul);
+                    div.append(button, ul);
                     container.appendChild(div);
                 });
-            });
+            })
+            .catch(error => console.error('获取更新数据出错:', error));
     </script>
 </body>
+
 </html>
