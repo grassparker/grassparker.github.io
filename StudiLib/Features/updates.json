@@ -4,6 +4,12 @@
       "year": 2026,
       "items": [
         {
+          "version": "Beta testing",
+          "date": "Jan 26, 2026",
+          "description": "Beta testing is starting from 20th Feb onwards!",
+          "details": "Our official Beta Testing phase is set to kick off this March, marking a major milestone in the StudiLib journey. We’ve been working around the clock to refine the pixel-art interface and stabilize the real-time synchronization that makes our collaborative spaces so special. This testing period will be crucial for gathering community feedback, squashing remaining bugs, and ensuring the platform can handle the weight of thousands of focused minds studying together. We’ll be rolling out invites in stages to ensure a smooth experience for everyone—stay tuned to our dev logs for the sign-up link!"
+        },
+        {
           "version": "Website in Chinese and English",
           "date": "Jan 24, 2026",
           "description": "Website in both Chinese and English",
