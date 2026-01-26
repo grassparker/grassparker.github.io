@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,121 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Cutive+Mono&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../StudiLibHomepageStyles.css">
 
-    <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="Documentation.css">
+    <style>
+        /* Layout */
+        .container {
+            flex: 1;
+        }
+
+        .magazine-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        /* Sidebars */
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e94560;
+            height: fit-content;
+        }
+
+        .sidebar-left h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e94560;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        /* Collapsible Features */
+        .collapsible-feature {
+            margin-bottom: 15px;
+        }
+
+        .feature-toggle {
+            background: rgba(233, 69, 96, 0.2);
+            border: 1px solid #e94560;
+            color: #e94560;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-family: "Pixelify Sans", sans-serif;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-toggle:hover {
+            background: rgba(233, 69, 96, 0.3);
+        }
+
+        .feature-content {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 8px;
+        }
+
+        .feature-content li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(233, 69, 96, 0.05);
+            border-left: 3px solid #e94560;
+            font-size: 14px;
+        }
+
+        /* Team Section */
+        .person {
+            background: rgba(232, 220, 200, 0.1);
+            border: 2px solid #e94560;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .person:hover {
+            background: rgba(232, 220, 200, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(233, 69, 96, 0.3);
+        }
+
+        .person h4 {
+            color: #e94560;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        /* Mobile Responsive Fixes */
+        @media (max-width: 768px) {
+            .magazine-layout {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .hero {
+                padding: 20px 10px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -53,40 +161,35 @@
                 </div>
             </aside>
 
-        <section class="main-content">
-            <section class="hero">
+            <section class="main-content">
+                <section class="hero">
+                    <h2>Technical Documentation</h2>
+                    <h3>Under the hood of your new favorite study spot.</h3>
 
-                <h2>Technical Documentation</h2>
+                    <p class="Import-text">This is the central hub for everything StudiLib. Whether you're looking for a deep dive into how our features work or you're a fellow developer curious about our stack, you'll find the blueprints right here. From logic snippets to design philosophy, we believe in keeping our library open-source in spirit.</p>
 
-                <h3>Under the hood of your new favorite study spot.</h3>
-            
-                <p class="Import-text">This is the central hub for everything StudiLib. Whether you're looking for a deep dive into how our features work or you're a fellow developer curious about our stack, you'll find the blueprints right here. From logic snippets to design philosophy, we believe in keeping our library open-source in spirit.</p>
+                    <h3 class="liTitle">The Team Behind the Magic:</h3>
+                    <p class="Import-text">StudiLib is a passion project built by a duo dedicated to solving the "lonely study session" problem. We wanted to build a place where productivity meets play.</p>
 
-                <h3 class="liTitle">The Team Behind the Magic:</h3>
-                <p class="Import-text">StudiLib is a passion project built by a duo dedicated to solving the "lonely study session" problem. We wanted to build a place where productivity meets play.</p>
+                    <div class="person">
+                        <h4><a href="https://grasspixel.click" target="_blank">Candy (She/Her) — Architecture & Vision</a></h4>
+                        <p class="Import-text">As the lead developer, Candy bridges the gap between clean code and cozy design. She handles the heavy lifting on the backend and ensures every pixel on the interface feels intentional and responsive.</p>
+                    </div>
 
-                <div class="person">
-                    <h4><a href="https://grasspixel.click">Candy (She/Her) — Architecture & Vision</a></h4>
-                    <p class="Import-text">As the lead developer, Candy bridges the gap between clean code and cozy design. She handles the heavy lifting on the backend and ensures every pixel on the interface feels intentional and responsive.</p>
-                </div>
+                    <div class="person">
+                        <h4>Ashmita (She/Her) — Visual Identity & Soul</h4>
+                        <p class="Import-text">Ashmita brings the world of StudiLib to life. From the character sprites to the overall aesthetic palette, her illustrations transform a productivity tool into a living, breathing community.</p>
+                    </div>
 
-                <div class="person">
-                    <h4>Ashmita (She/Her) — Visual Identity & Soul</h4>
-                    <p class="Import-text">Ashmita brings the world of StudiLib to life. From the character sprites to the overall aesthetic palette, her illustrations transform a productivity tool into a living, breathing community.</p>
-                </div>
-
-
-                <h3 class="liTitle">Ready to Level Up?</h3>
-
-                <p class="Import-text">Explore the docs to master the platform, or jump straight back into the community and start your next session.</p>
+                    <h3 class="liTitle">Ready to Level Up?</h3>
+                    <p class="Import-text">Explore the docs to master the platform, or jump straight back into the community and start your next session.</p>
+                </section>
             </section>
-        </section>
-    </div>
+        </div>
     </main>
 
     <footer class="main-footer">
         <p>&copy; 2025 by Candy. All rights reserved.</p>
-
         <ul class="nav-links">
             <li><a href="../Docs/PrivacyPolicy.html">Privacy Policy</a></li>
             <li><a href="../Docs/TermsAndConditions.html">Terms and Services</a></li>
@@ -94,15 +197,17 @@
     </footer>
 
     <script>
-       document.querySelectorAll('.feature-toggle').forEach(button => {
+        // Collapsible feature script
+        document.querySelectorAll('.feature-toggle').forEach(button => {
             button.addEventListener('click', function() {
                 const content = this.nextElementSibling;
                 const isHidden = content.style.display === 'none';
-                
+
                 content.style.display = isHidden ? 'block' : 'none';
                 this.textContent = (isHidden ? '▼ ' : '▶ ') + this.textContent.slice(2);
             });
         });
     </script>
 </body>
+
 </html>

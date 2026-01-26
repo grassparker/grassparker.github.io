@@ -7,14 +7,48 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Cutive+Mono&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../StudiLibHomepageStyles.css">
+    <style>
+        .container {
+            flex: 1;
+        }
 
-    <link rel="icon" type="image/svg+xml" href="">
-    <link rel="stylesheet" href="Blogs.css">
+        .magazine-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .sidebar-left {
+            background: rgba(233, 69, 96, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e94560;
+        }
+
+        .sidebar-left h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e94560;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .sidebar-left ul {
+            font-size: 16px;
+            list-style-type: none;
+        }
+
+        .sidebar-left li {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 3px solid #e94560;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,39 +68,39 @@
 
         <div class="magazine-layout">
             <aside class="sidebar-left">
-                <h3>Blogs</h3>
+                <h3>Archives</h3>
                 <div id="blogs-container"></div>
             </aside>
 
-        <section class="main-content">
-            <section class="hero">
+            <section class="main-content">
+                <section class="hero">
+                    <h2>The StudiLib Journal</h2>
+                    <h3>Notes, Thoughts, and Study Science</h3>
+                
+                    <p class="Import-text">
+                        Welcome to our digital corner of the internet. Here, we dive deep into the art of learning. 
+                        Whether you're looking for the best Pomodoro playlists, deep dives into productivity psychology, 
+                        or just want to see what the StudiLib team is thinking about, you're in the right place.
+                    </p>
 
-                <h2>The StudiLib Journal</h2>
+                    <h3 class="liTitle">What we write about:</h3>
+                    <ul>
+                        <li><b>🧠 Productivity Science</b> – Why we procrastinate and how to trick your brain into focus.</li>
+                        <li><b>💻 Dev Logs</b> – Behind-the-scenes looks at how StudiLib is built and designed.</li>
+                        <li><b>🌱 Student Well-being</b> – Balancing the grind with mental health and rest.</li>
+                        <li><b>🎒 Study Spotlights</b> – Highlighting the best ways to collaborate and learn in groups.</li>
+                        <li><b>🎨 Creative Corner</b> – Art, aesthetics, and the design inspiration behind our pixel world.</li>
+                    </ul>
 
-                <h3>Notes, Thoughts, and Study Science</h3>
-            
-                <p class="Import-text">Welcome to our digital corner of the internet. Here, we dive deep into the art of learning. Whether you're looking for the best Pomodoro playlists, deep dives into productivity psychology, or just want to see what the StudiLib team is thinking about, you're in the right place.</p>
-
-                <h3 class="liTitle">What we write about:</h3>
-                <ul>
-                    <li><b>🧠 Productivity Science</b> – Why we procrastinate and how to trick your brain into focus.</li>
-                    <li><b>💻 Dev Logs</b> – Behind-the-scenes looks at how StudiLib is built and designed.</li>
-                    <li><b>🌱 Student Well-being</b> – Balancing the grind with mental health and rest.</li>
-                    <li><b>🎒 Study Spotlights</b> – Highlighting the best ways to collaborate and learn in groups.</li>
-                    <li><b>🎨 Creative Corner</b> – Art, aesthetics, and the design inspiration behind our pixel world.</li>
-                </ul>
-
-                <h3 class="liTitle">Stay in the Loop</h3>
-
-                <p class="Import-text">We post new articles every month. Grab a coffee, settle in, and let's grow together.</p>
+                    <h3 class="liTitle">Stay in the Loop</h3>
+                    <p class="Import-text">We post new articles every month. Grab a coffee, settle in, and let's grow together.</p>
+                </section>
             </section>
-        </section>
-    </div>
+        </div>
     </main>
 
     <footer class="main-footer">
         <p>&copy; 2025 by Candy. All rights reserved.</p>
-
         <ul class="nav-links">
             <li><a href="../Docs/PrivacyPolicy.html">Privacy Policy</a></li>
             <li><a href="../Docs/TermsAndConditions.html">Terms and Services</a></li>
@@ -74,7 +108,7 @@
     </footer>
 
     <script>
-        // Load and render updates from JSON
+        // Load and render blogs from JSON
         fetch('blogs.json')
             .then(response => response.json())
             .then(data => {
@@ -87,15 +121,28 @@
                     const isFirstYear = index === 0;
                     const button = document.createElement('button');
                     button.className = 'year-toggle';
+                    button.style.width = "100%";
+                    button.style.textAlign = "left";
                     button.textContent = (isFirstYear ? '▼ ' : '▶ ') + yearGroup.year;
                     
                     const ul = document.createElement('ul');
                     ul.className = 'year-content';
                     ul.style.display = isFirstYear ? 'block' : 'none';
+                    ul.style.padding = "0";
+                    ul.style.listStyle = "none";
                     
                     yearGroup.items.forEach(item => {
                         const li = document.createElement('li');
-                        li.innerHTML = `<a href="blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link"><b>${item.title}</b> (${item.date}) – ${item.summary}</a>`;
+                        li.style.padding = "10px";
+                        li.style.borderLeft = "3px solid #e94560";
+                        li.style.background = "rgba(233,69,96,0.05)";
+                        li.style.marginBottom = "5px";
+                        
+                        li.innerHTML = `
+                            <a href="blogupdate.html?title=${encodeURIComponent(item.title)}" class="update-link">
+                                <b>${item.title}</b><br>
+                                <small>${item.date}</small>
+                            </a>`;
                         ul.appendChild(li);
                     });
                     
@@ -109,7 +156,8 @@
                     div.appendChild(ul);
                     container.appendChild(div);
                 });
-            });
+            })
+            .catch(err => console.error("Error loading blogs:", err));
     </script>
 </body>
 </html>
