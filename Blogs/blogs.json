@@ -5,7 +5,7 @@
       "items": [
         {
           "title": "Ever curious about the front-end?",
-          "date": "Feb 1st, 2026",
+          "date": "Feb 1, 2026",
           "summary": "The front-end is more than just making things pretty",
           "text": "The front-end is usually about making things pretty. Is that the case though? Most of the time, yes. But when you are dealing with game dev or software dev that has interactive features, the front-end is no longer making the UI good, but also the UX. For example, in StudiLib, the front-end is consisted of the character, the background, and most importantly, how each scene transitions and how smoothing the animation is...since nobody loves a laggy software. \n\nIn a standard web app, if a button doesn't respond in 100ms, the user thinks the internet is slow. In an interactive scene like StudiLib, if the character doesn't respond in 16ms (the window for 60fps), the user thinks the software is trash. \n\nTherefore, the devs are working hard to make sure the sfotware runs very smoothly. ;)"
         },
